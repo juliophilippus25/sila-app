@@ -23,14 +23,9 @@
                             @include('akta-perkawinan.partials.data-ayah-dari-suami-form')
                         </div>
 
-                        <div id="step-3" class="step-content hidden">
-                            @include('akta-perkawinan.partials.data-ayah-dari-suami-form')
+                        <div id="step-4" class="step-content hidden">
+                            @include('akta-perkawinan.partials.data-ibu-dari-suami-form')
                         </div>
-
-
-                        <!-- Form step selanjutnya bisa ditambahkan di sini -->
-                        <!-- Misalnya data anak, data saksi, dll -->
-
                     </div>
 
                     <div class="flex justify-between">
