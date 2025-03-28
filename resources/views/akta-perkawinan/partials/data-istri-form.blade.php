@@ -1,7 +1,7 @@
 <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Data Suami') }}
+            {{ __('Data Istri') }}
         </h2>
 
         {{-- <p class="mt-1 text-sm text-gray-600">
@@ -139,7 +139,7 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div>
                 <x-select name="ds_status_perkawinan" label="Status Perkawinan Sebelum Nikah" :options="$statusPerkawinan"
                     placeholder="Pilih Status Perkawinan" />
@@ -151,12 +151,6 @@
                 <x-text-input id="ds_perkawinan_ke" name="ds_perkawinan_ke" type="text"
                     class="mt-1 block w-full" />
                 <x-input-error class="mt-2" :messages="$errors->get('ds_perkawinan_ke')" />
-            </div>
-
-            <div>
-                <x-input-label for="ds_istri_ke" :value="__('Istri Yang Ke (bagi yang poligami)')" />
-                <x-text-input id="ds_istri_ke" name="ds_istri_ke" type="text" class="mt-1 block w-full" />
-                <x-input-error class="mt-2" :messages="$errors->get('ds_istri_ke')" />
             </div>
         </div>
 
