@@ -23,16 +23,20 @@
                             @include('akta-perkawinan.partials.data-ayah-dari-suami-form')
                         </div>
 
-                        <div id="step-4" class="step-content hidden">
+                        <div id="step-3" class="step-content hidden">
                             @include('akta-perkawinan.partials.data-ibu-dari-suami-form')
                         </div>
 
-                        <div id="step-5" class="step-content">
+                        <div id="step-4" class="step-content">
                             @include('akta-perkawinan.partials.data-istri-form')
                         </div>
 
-                        <div id="step-6" class="step-content hidden">
+                        <div id="step-5" class="step-content hidden">
                             @include('akta-perkawinan.partials.data-ayah-dari-istri-form')
+                        </div>
+
+                        <div id="step-6" class="step-content hidden">
+                            @include('akta-perkawinan.partials.data-ibu-dari-istri-form')
                         </div>
                     </div>
 
