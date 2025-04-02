@@ -38,6 +38,10 @@
                         <div id="step-6" class="step-content hidden">
                             @include('akta-perkawinan.partials.data-ibu-dari-istri-form')
                         </div>
+
+                        <div id="step-7" class="step-content hidden">
+                            @include('akta-perkawinan.partials.data-saksi-form')
+                        </div>
                     </div>
 
                     <div class="flex justify-between">
