@@ -46,6 +46,10 @@
                         <div id="step-8" class="step-content hidden">
                             @include('akta-perkawinan.partials.data-perkawinan-form')
                         </div>
+
+                        <div id="step-9" class="step-content hidden">
+                            @include('akta-perkawinan.partials.data-administrasi-form')
+                        </div>
                     </div>
 
                     <div class="flex justify-between">
