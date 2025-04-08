@@ -6,4 +6,7 @@
             {{ __('Akta Lahir') }}
         </h2>
     </x-slot>
+    
+    
+
 </x-app-layout>
