@@ -21,7 +21,7 @@ class AdminTableSeeder extends Seeder
               'id'              => $userId,
               'name'            => 'Riswan',
               'email'           => 'riswan@gmail.com',
-              'role'            => 'petugas',
+              'role'            => 'admin',
               'nip'             => '1234567891011123',
               'password'        => bcrypt('password'),
               'created_at'      => Carbon::now(),

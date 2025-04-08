@@ -12,15 +12,17 @@
     <div class="mt-6 space-y-6">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div>
-                <x-input-label for="dp_tanggal_lahir" :value="__('Tanggal Pemberkatan Perkawinan')" />
-                <x-text-input id="dp_tanggal_lahir" name="dp_tanggal_lahir" type="date" class="mt-1 block w-full" />
-                <x-input-error class="mt-2" :messages="$errors->get('dp_tanggal_lahir')" />
+                <x-input-label for="dp_tanggal_pemberkatan" :value="__('Tanggal Pemberkatan Perkawinan')" />
+                <x-text-input id="dp_tanggal_pemberkatan" name="dp_tanggal_pemberkatan" type="date"
+                    class="mt-1 block w-full" />
+                <x-input-error class="mt-2" :messages="$errors->get('dp_tanggal_pemberkatan')" />
             </div>
 
             <div>
-                <x-input-label for="dp_tanggal_lahir" :value="__('Tanggal Melapor')" />
-                <x-text-input id="dp_tanggal_lahir" name="dp_tanggal_lahir" type="date" class="mt-1 block w-full" />
-                <x-input-error class="mt-2" :messages="$errors->get('dp_tanggal_lahir')" />
+                <x-input-label for="dp_tanggal_melapor" :value="__('Tanggal Melapor')" />
+                <x-text-input id="dp_tanggal_melapor" name="dp_tanggal_melapor" type="date"
+                    class="mt-1 block w-full" />
+                <x-input-error class="mt-2" :messages="$errors->get('dp_tanggal_melapor')" />
             </div>
 
             <div>
@@ -61,7 +63,8 @@
 
             <div>
                 <x-input-label for="dp_no_putusan_pengadilan" :value="__('Nomor Putusan Penetapan Pengadilan')" />
-                <x-text-input id="dp_no_putusan_pengadilan" name="dp_no_putusan_pengadilan" type="text" class="mt-1 block w-full" />
+                <x-text-input id="dp_no_putusan_pengadilan" name="dp_no_putusan_pengadilan" type="text"
+                    class="mt-1 block w-full" />
                 <x-input-error class="mt-2" :messages="$errors->get('dp_no_putusan_pengadilan')" />
             </div>
 
