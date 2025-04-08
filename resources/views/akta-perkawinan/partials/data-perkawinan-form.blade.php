@@ -44,25 +44,25 @@
             </div>
 
             <div>
-                <x-input-label for="dp_organisasi_penghayat" :value="__('Nama Pemuka Agama')" />
-                <x-text-input id="dp_organisasi_penghayat" name="dp_organisasi_penghayat" type="text"
+                <x-input-label for="dp_nama_pemuka_agama" :value="__('Nama Pemuka Agama')" />
+                <x-text-input id="dp_nama_pemuka_agama" name="dp_nama_pemuka_agama" type="text"
                     class="mt-1 block w-full" />
-                <x-input-error class="mt-2" :messages="$errors->get('dp_organisasi_penghayat')" />
+                <x-input-error class="mt-2" :messages="$errors->get('dp_nama_pemuka_agama')" />
             </div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div>
-                <x-input-label for="dp_badan_peralihan" :value="__('Nama Badan Peralihan')" />
-                <x-text-input id="dp_badan_peralihan" name="dp_badan_peralihan" type="text"
+                <x-input-label for="dp_badan_peradilan" :value="__('Nama Badan Peradilan')" />
+                <x-text-input id="dp_badan_peradilan" name="dp_badan_peradilan" type="text"
                     class="mt-1 block w-full" />
-                <x-input-error class="mt-2" :messages="$errors->get('dp_badan_peralihan')" />
+                <x-input-error class="mt-2" :messages="$errors->get('dp_badan_peradilan')" />
             </div>
 
             <div>
-                <x-input-label for="dp_no_putusan" :value="__('Nomor Putusan Penetapan Pengadilan')" />
-                <x-text-input id="dp_no_putusan" name="dp_no_putusan" type="text" class="mt-1 block w-full" />
-                <x-input-error class="mt-2" :messages="$errors->get('dp_no_putusan')" />
+                <x-input-label for="dp_no_putusan_pengadilan" :value="__('Nomor Putusan Penetapan Pengadilan')" />
+                <x-text-input id="dp_no_putusan_pengadilan" name="dp_no_putusan_pengadilan" type="text" class="mt-1 block w-full" />
+                <x-input-error class="mt-2" :messages="$errors->get('dp_no_putusan_pengadilan')" />
             </div>
 
             <div>

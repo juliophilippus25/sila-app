@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+
 abstract class Controller
 {
     public function getPendidikanTerakhir() {
@@ -57,5 +59,9 @@ abstract class Controller
             'WNI' => 'WNI',
             'WNA' => 'WNA'
         ];
+    }
+
+    public function generateId() {
+        return strtoupper(md5("!@#!@#" . Carbon::now()->format('YmdH:i:s')));
     }
 }

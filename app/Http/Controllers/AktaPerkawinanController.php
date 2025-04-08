@@ -15,4 +15,8 @@ class AktaPerkawinanController extends Controller
 
         return view('akta-perkawinan.index', compact('pendidikanTerakhir', 'agama', 'pekerjaan', 'statusPerkawinan', 'kewarganegaraan'));
     }
+
+    public function store(Request $request) {
+
+    }
 }

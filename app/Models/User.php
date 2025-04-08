@@ -12,12 +12,16 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
+    // protected $keyType = 'string';
+    // protected $primaryKey = 'id';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var list<string>
      */
     protected $fillable = [
+        'id',
         'name',
         'email',
         'password',
@@ -44,5 +48,15 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function aktaPerkawinan()
+    {
+        return $this->hasOne(AktaPerkawinan::class, 'user_id');
+    }
+
+    public function petugasAktaPerkawinans()
+    {
+        return $this->hasMany(AktaPerkawinan::class, 'petugas_id');
     }
 }
