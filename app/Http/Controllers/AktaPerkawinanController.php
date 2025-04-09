@@ -41,6 +41,7 @@ class AktaPerkawinanController extends Controller
         $this->storeAyahIstri($request, $aktaPerkawinan->id);
         $this->storeIbuIstri($request, $aktaPerkawinan->id);
         $this->storeSaksi($request, $aktaPerkawinan->id);
+        $this->storePerkawinan($request, $aktaPerkawinan->id);
     }
 
     private function storeSuami($request, $aktaPerkawinanId) {
@@ -230,7 +231,18 @@ class AktaPerkawinanController extends Controller
         $perkawinan->tanggal_putusan = $request->dp_no_putusan_pengadilan;
         $perkawinan->ijin_perwakilan = $request->dp_ijin_perwakilan;
         $perkawinan->jumlah_anak = $request->dp_jumlah_anak;
-        $perkawinan->anak = $request->anak;
+
+        $anakData = [];
+        if ($request->has('anak')) {
+            foreach ($request->anak as $anak) {
+                $anakData[] = [
+                    'nama_anak' => $anak['nama_anak'],
+                    'no_akta' => $anak['no_akta'],
+                    'tanggal_akta' => $anak['tanggal_akta']
+                ];
+            }
+        }
+        $perkawinan->anak = json_encode($anakData);
 
         $perkawinan->save();
     }

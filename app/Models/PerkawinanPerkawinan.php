@@ -26,6 +26,10 @@ class PerkawinanPerkawinan extends Model
         'anak',
     ];
 
+    protected $casts = [
+        'anak' => 'array',
+    ];
+
     public function aktaPerkawinan()
     {
         return $this->belongsTo(AktaPerkawinan::class, 'akta_perkawinan_id');
