@@ -211,8 +211,47 @@ class AktaPerkawinanController extends Controller
         $saksi = new PerkawinanSaksi();
 
         $saksi->akta_perkawinan_id = $aktaPerkawinanId;
-        $saksi->saksi_1 = $request->ds_1;
-        $saksi->saksi_2 = $request->ds_2;
+
+        $saksi_1 = [
+            'nik' => $request->ds_1['nik'],
+            'nama_lengkap' => $request->ds_1['nama_lengkap'],
+            'tempat_lahir' => $request->ds_1['tempat_lahir'],
+            'tanggal_lahir' => $request->ds_1['tanggal_lahir'],
+            'alamat' => $request->ds_1['alamat'],
+            'rt' => $request->ds_1['rt'],
+            'rw' => $request->ds_1['rw'],
+            'kode_pos' => $request->ds_1['kode_pos'],
+            'telepon' => $request->ds_1['telepon'],
+            'kelurahan' => $request->ds_1['kelurahan'],
+            'kecamatan' => $request->ds_1['kecamatan'],
+            'kabupaten' => $request->ds_1['kabupaten'],
+            'provinsi' => $request->ds_1['provinsi'],
+            'pekerjaan' => $request->ds_1['pekerjaan'],
+            'agama' => $request->ds_1['agama'],
+            'organisasi_penghayat' => $request->ds_1['organisasi_penghayat'],
+        ];
+
+        $saksi_2 = [
+            'nik' => $request->ds_2['nik'],
+            'nama_lengkap' => $request->ds_2['nama_lengkap'],
+            'tempat_lahir' => $request->ds_2['tempat_lahir'],
+            'tanggal_lahir' => $request->ds_2['tanggal_lahir'],
+            'alamat' => $request->ds_2['alamat'],
+            'rt' => $request->ds_2['rt'],
+            'rw' => $request->ds_2['rw'],
+            'kode_pos' => $request->ds_2['kode_pos'],
+            'telepon' => $request->ds_2['telepon'],
+            'kelurahan' => $request->ds_2['kelurahan'],
+            'kecamatan' => $request->ds_2['kecamatan'],
+            'kabupaten' => $request->ds_2['kabupaten'],
+            'provinsi' => $request->ds_2['provinsi'],
+            'pekerjaan' => $request->ds_2['pekerjaan'],
+            'agama' => $request->ds_2['agama'],
+            'organisasi_penghayat' => $request->ds_2['organisasi_penghayat'],
+        ];
+
+        $saksi->saksi_1 = json_encode($saksi_1);
+        $saksi->saksi_2 = json_encode($saksi_2);
 
         $saksi->save();
     }

@@ -16,6 +16,11 @@ class PerkawinanSaksi extends Model
         'saksi_2'
     ];
 
+    protected $casts = [
+        'saksi_1' => 'array',
+        'saksi_2' => 'array'
+    ];
+
     public function aktaPerkawinan()
     {
         return $this->belongsTo(AktaPerkawinan::class, 'akta_perkawinan_id');
