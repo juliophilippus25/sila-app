@@ -15,6 +15,10 @@ class PerkawinanAdministrasi extends Model
         'persyaratan',
     ];
 
+    protected $casts = [
+        'persyaratan' => 'array',
+    ];
+
     public function aktaPerkawinan()
     {
         return $this->belongsTo(AktaPerkawinan::class, 'akta_perkawinan_id');

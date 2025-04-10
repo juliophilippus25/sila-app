@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AktaPerkawinan;
+use App\Models\PerkawinanAdministrasi;
 use App\Models\PerkawinanAyahIstri;
 use App\Models\PerkawinanAyahSuami;
 use App\Models\PerkawinanIbuIstri;
@@ -42,6 +43,9 @@ class AktaPerkawinanController extends Controller
         $this->storeIbuIstri($request, $aktaPerkawinan->id);
         $this->storeSaksi($request, $aktaPerkawinan->id);
         $this->storePerkawinan($request, $aktaPerkawinan->id);
+        $this->storeAdministrasi($request, $aktaPerkawinan->id);
+
+        return redirect()->route('akta-perkawinan.index');
     }
 
     private function storeSuami($request, $aktaPerkawinanId) {
@@ -281,8 +285,33 @@ class AktaPerkawinanController extends Controller
                 ];
             }
         }
-        $perkawinan->anak = json_encode($anakData);
 
+        $perkawinan->anak = json_encode($anakData);
         $perkawinan->save();
+    }
+
+    private function storeAdministrasi($request, $aktaPerkawinanId) {
+        $administrasi = new PerkawinanAdministrasi();
+
+        $administrasi->akta_perkawinan_id = $aktaPerkawinanId;
+
+        $persyaratanData = [];
+        if ($request->has('persyaratan')) {
+            foreach ($request->persyaratan as $item) {
+                $path = null;
+
+                if (isset($item['file']) && $item['file'] instanceof \Illuminate\Http\UploadedFile) {
+                    $path = $item['file']->store('persyaratan', 'public');
+                }
+
+                $persyaratanData[] = [
+                    'nama_persyaratan' => $item['persyaratan'],
+                    'path' => $path
+                ];
+            }
+        }
+
+        $administrasi->persyaratan = json_encode($persyaratanData);
+        $administrasi->save();
     }
 }
