@@ -23,7 +23,7 @@ return new class extends Migration
             // $table->string('nik')->nullable();
             // $table->string('nama_lengkap')->nullable();
             // $table->enum('pendidikan_terakhir', ['Belum Sekolah', 'Belum Tamat SD', 'SD/Sederajat','SLTP', 'SLTA', 'D1', 'D2', 'D3', 'S1', 'S2', 'S3'])->nullable();
-            // $table->enum('agama', ['Islam', 'Kriten', 'Katolik', 'Hindu', 'Budha', 'Konghucu', 'Penghayat Kepercayaan','Lainnya'])->nullable();
+            // $table->enum('agama', ['Islam', 'Kristen', 'Katolik', 'Hindu', 'Budha', 'Konghucu', 'Penghayat Kepercayaan','Lainnya'])->nullable();
             // $table->string('organisasi_penghayat')->nullable();
             // $table->date('tanggal_lahir')->nullable();
             // $table->string('alamat')->nullable();
@@ -33,7 +33,8 @@ return new class extends Migration
             // $table->string('telepon')->nullable();
             // $table->string('desa_kelurahan')->nullable();
             // $table->string('kecamatan')->nullable();
-            // $table->string('kab_kota')->nullable();
+            //             $table->string('kabupaten_kota')->nullable();
+
             // $table->string('pronvisi')->nullable();
         });
     }

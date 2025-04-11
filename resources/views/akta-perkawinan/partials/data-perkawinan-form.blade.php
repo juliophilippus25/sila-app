@@ -14,27 +14,27 @@
             <div>
                 <x-input-label for="dp_tanggal_pemberkatan" :value="__('Tanggal Pemberkatan Perkawinan')" />
                 <x-text-input id="dp_tanggal_pemberkatan" name="dp_tanggal_pemberkatan" type="date"
-                    class="mt-1 block w-full" />
+                    class="mt-1 block w-full" required />
                 <x-input-error class="mt-2" :messages="$errors->get('dp_tanggal_pemberkatan')" />
             </div>
 
             <div>
                 <x-input-label for="dp_tanggal_melapor" :value="__('Tanggal Melapor')" />
-                <x-text-input id="dp_tanggal_melapor" name="dp_tanggal_melapor" type="date"
-                    class="mt-1 block w-full" />
+                <x-text-input id="dp_tanggal_melapor" name="dp_tanggal_melapor" type="date" class="mt-1 block w-full"
+                    required />
                 <x-input-error class="mt-2" :messages="$errors->get('dp_tanggal_melapor')" />
             </div>
 
             <div>
                 <x-input-label for="dp_pukul" :value="__('Pukul')" />
-                <x-text-input id="dp_pukul" name="dp_pukul" type="time" class="mt-1 block w-full" />
+                <x-text-input id="dp_pukul" name="dp_pukul" type="time" class="mt-1 block w-full" required />
                 <x-input-error class="mt-2" :messages="$errors->get('dp_pukul')" />
             </div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div>
-                <x-select name="dp_agama" label="Agama" :options="$agama" placeholder="Pilih Agama" />
+                <x-select name="dp_agama" label="Agama" :options="$agama" placeholder="Pilih Agama" required />
                 <x-input-error class="mt-2" :messages="$errors->get('dp_agama')" />
             </div>
 
@@ -48,7 +48,7 @@
             <div>
                 <x-input-label for="dp_nama_pemuka_agama" :value="__('Nama Pemuka Agama')" />
                 <x-text-input id="dp_nama_pemuka_agama" name="dp_nama_pemuka_agama" type="text"
-                    class="mt-1 block w-full" />
+                    class="mt-1 block w-full" required />
                 <x-input-error class="mt-2" :messages="$errors->get('dp_nama_pemuka_agama')" />
             </div>
         </div>
@@ -56,22 +56,22 @@
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div>
                 <x-input-label for="dp_badan_peradilan" :value="__('Nama Badan Peradilan')" />
-                <x-text-input id="dp_badan_peradilan" name="dp_badan_peradilan" type="text"
-                    class="mt-1 block w-full" />
+                <x-text-input id="dp_badan_peradilan" name="dp_badan_peradilan" type="text" class="mt-1 block w-full"
+                    required />
                 <x-input-error class="mt-2" :messages="$errors->get('dp_badan_peradilan')" />
             </div>
 
             <div>
                 <x-input-label for="dp_no_putusan_pengadilan" :value="__('Nomor Putusan Penetapan Pengadilan')" />
                 <x-text-input id="dp_no_putusan_pengadilan" name="dp_no_putusan_pengadilan" type="text"
-                    class="mt-1 block w-full" />
+                    class="mt-1 block w-full" required />
                 <x-input-error class="mt-2" :messages="$errors->get('dp_no_putusan_pengadilan')" />
             </div>
 
             <div>
                 <x-input-label for="dp_tanggal_putusan" :value="__('Tanggal Putusan Penetapan Pengadilan')" />
-                <x-text-input id="dp_tanggal_putusan" name="dp_tanggal_putusan" type="date"
-                    class="mt-1 block w-full" />
+                <x-text-input id="dp_tanggal_putusan" name="dp_tanggal_putusan" type="date" class="mt-1 block w-full"
+                    required />
                 <x-input-error class="mt-2" :messages="$errors->get('dp_tanggal_putusan')" />
             </div>
         </div>
@@ -85,7 +85,7 @@
         <div>
             <x-input-label for="dp_jumlah_anak" :value="__('Jumlah Anak Yang Telah Diakui dan Disahkan')" />
             <x-text-input id="dp_jumlah_anak" name="dp_jumlah_anak" type="number" class="mt-1 block w-1/4"
-                min="0" step="1" oninput="generateAnakForms()" />
+                min="0" step="1" oninput="generateAnakForms()" required />
             <x-input-error class="mt-2" :messages="$errors->get('dp_jumlah_anak')" />
         </div>
 
@@ -105,20 +105,20 @@
 
                         <div>
                             <x-input-label for="dp_nama_anak_${i}" :value="__('Nama Anak')" />
-                            <x-text-input id="dp_nama_anak_${i}" name="anak[${i}][nama_anak]" type="text" class="mt-1 block w-full" />
+                            <x-text-input id="dp_nama_anak_${i}" name="anak[${i}][nama_anak]" type="text" class="mt-1 block w-full" required/>
                             <x-input-error class="mt-2" :messages="$errors->get('dp_nama_anak_${i}')" />
                         </div>
 
                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-2">
                             <div>
                                 <x-input-label for="dp_no_akta_lahir_${i}" :value="__('Nomor Akta Kelahiran')" />
-                                <x-text-input id="dp_no_akta_lahir_${i}" name="anak[${i}][no_akta]" type="text" class="mt-1 block w-full" />
+                                <x-text-input id="dp_no_akta_lahir_${i}" name="anak[${i}][no_akta]" type="text" class="mt-1 block w-full" required/>
                                 <x-input-error class="mt-2" :messages="$errors->get('dp_no_akta_lahir_${i}')" />
                             </div>
 
                             <div>
                                 <x-input-label for="dp_tanggal_akta_lahir_${i}" :value="__('Tanggal Akta Kelahiran')" />
-                                <x-text-input id="dp_tanggal_akta_lahir_${i}" name="anak[${i}][tanggal_akta]" type="date" class="mt-1 block w-full" />
+                                <x-text-input id="dp_tanggal_akta_lahir_${i}" name="anak[${i}][tanggal_akta]" type="date" class="mt-1 block w-full" required/>
                                 <x-input-error class="mt-2" :messages="$errors->get('dp_tanggal_akta_lahir_${i}')" />
                             </div>
                         </div>

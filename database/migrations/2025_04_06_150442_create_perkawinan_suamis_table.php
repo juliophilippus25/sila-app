@@ -29,8 +29,8 @@ return new class extends Migration
             $table->string('kecamatan')->nullable();
             $table->string('kabupaten_kota')->nullable();
             $table->string('provinsi')->nullable();
-            $table->enum('pendidikan_terakhir', ['Belum Sekolah', 'Belum Tamat SD', 'SD/Sederajat','SLTP', 'SLTA', 'D1', 'D2', 'D3', 'S1', 'S2', 'S3'])->nullable();
-            $table->enum('agama', ['Islam', 'Kriten', 'Katolik', 'Hindu', 'Budha', 'Konghucu', 'Penghayat Kepercayaan','Lainnya'])->nullable();
+            $table->enum('pendidikan_terakhir', ['Tidak/Belum Sekolah', 'Belum Tamat SD', 'SD/Sederajat', 'SLTP/Sederajat', 'SLTA/Sederajat', 'Diploma I/II', 'Akademi/Diploma III/S. Muda', 'Diploma IV/Strata I', 'Strata II', 'Strata III'])->nullable();
+            $table->enum('agama', ['Islam', 'Kristen', 'Katolik', 'Hindu', 'Budha', 'Konghucu', 'Penghayat Kepercayaan','Lainnya'])->nullable();
             $table->string('organisasi_penghayat')->nullable();
             $table->string('pekerjaan')->nullable();
             $table->integer('anak_ke')->nullable();

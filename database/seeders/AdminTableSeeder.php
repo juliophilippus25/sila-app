@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class AdminTableSeeder extends Seeder
 {
@@ -14,7 +15,7 @@ class AdminTableSeeder extends Seeder
      */
     public function run(): void
     {
-        $userId = strtoupper(md5("!@#!@#" . Carbon::now()->format('YmdH:i:s')));
+        $userId = (string) Str::uuid();
 
         User::insert([
             [

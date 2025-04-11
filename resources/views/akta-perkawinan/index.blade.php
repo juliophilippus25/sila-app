@@ -10,9 +10,9 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <form method="post" action="#" class="space-y-6" enctype="multipart/form-data">
+                <form method="post" action="{{ route('akta-perkawinan.store') }}" class="space-y-6"
+                    enctype="multipart/form-data">
                     @csrf
-                    @method('POST')
 
                     <div id="stepper-form">
                         <div id="step-1" class="step-content">
@@ -55,7 +55,7 @@
                     <div class="flex justify-between">
                         <x-secondary-button id="prev-btn" type="button">{{ __('Previous') }}</x-secondary-button>
                         <x-primary-button id="next-btn" type="button">{{ __('Next') }}</x-primary-button>
-                        <x-primary-button id="submit-btn" type="button">{{ __('Submit') }}</x-primary-button>
+                        <x-primary-button id="submit-btn" type="submit">{{ __('Submit') }}</x-primary-button>
                     </div>
                 </form>
             </div>

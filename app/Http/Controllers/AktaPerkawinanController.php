@@ -12,7 +12,7 @@ use App\Models\PerkawinanIstri;
 use App\Models\PerkawinanPerkawinan;
 use App\Models\PerkawinanSaksi;
 use App\Models\PerkawinanSuami;
-use Illuminate\Container\Attributes\Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class AktaPerkawinanController extends Controller
@@ -56,7 +56,6 @@ class AktaPerkawinanController extends Controller
         $suami->nomor_kk = $request->ds_nomor_kk;
         $suami->nomor_paspor = $request->ds_nomor_paspor;
         $suami->nama_lengkap = $request->ds_nama_lengkap;
-        $suami->agama = $request->ds_agama;
         $suami->tanggal_lahir = $request->ds_tanggal_lahir;
         $suami->tempat_lahir = $request->ds_tempat_lahir;
         $suami->alamat = $request->ds_alamat;
@@ -64,9 +63,9 @@ class AktaPerkawinanController extends Controller
         $suami->rw = $request->ds_rw;
         $suami->kode_pos = $request->ds_kode_pos;
         $suami->telepon = $request->ds_telepon;
-        $suami->kelurahan = $request->ds_kelurahan;
+        $suami->desa_kelurahan = $request->ds_kelurahan;
         $suami->kecamatan = $request->ds_kecamatan;
-        $suami->kabupaten = $request->ds_kabupaten;
+        $suami->kabupaten_kota = $request->ds_kabupaten;
         $suami->provinsi = $request->ds_provinsi;
         $suami->pendidikan_terakhir = $request->ds_pendidikan_terakhir;
         $suami->agama = $request->ds_agama;
@@ -97,9 +96,9 @@ class AktaPerkawinanController extends Controller
         $ayahSuami->rw = $request->dads_rw;
         $ayahSuami->kode_pos = $request->dads_kode_pos;
         $ayahSuami->telepon = $request->dads_telepon;
-        $ayahSuami->kelurahan = $request->dads_kelurahan;
+        $ayahSuami->desa_kelurahan = $request->dads_kelurahan;
         $ayahSuami->kecamatan = $request->dads_kecamatan;
-        $ayahSuami->kabupaten = $request->dads_kabupaten;
+        $ayahSuami->kabupaten_kota = $request->dads_kabupaten;
         $ayahSuami->provinsi = $request->dads_provinsi;
         $ayahSuami->pekerjaan = $request->dads_pekerjaan;
 
@@ -121,9 +120,9 @@ class AktaPerkawinanController extends Controller
         $ibuSuami->rw = $request->dids_rw;
         $ibuSuami->kode_pos = $request->dids_kode_pos;
         $ibuSuami->telepon = $request->dids_telepon;
-        $ibuSuami->kelurahan = $request->dids_kelurahan;
+        $ibuSuami->desa_kelurahan = $request->dids_kelurahan;
         $ibuSuami->kecamatan = $request->dids_kecamatan;
-        $ibuSuami->kabupaten = $request->dids_kabupaten;
+        $ibuSuami->kabupaten_kota = $request->dids_kabupaten;
         $ibuSuami->provinsi = $request->dids_provinsi;
         $ibuSuami->pekerjaan = $request->dids_pekerjaan;
 
@@ -146,12 +145,11 @@ class AktaPerkawinanController extends Controller
         $istri->rw = $request->di_rw;
         $istri->kode_pos = $request->di_kode_pos;
         $istri->telepon = $request->di_telepon;
-        $istri->kelurahan = $request->di_kelurahan;
+        $istri->desa_kelurahan = $request->di_kelurahan;
         $istri->kecamatan = $request->di_kecamatan;
-        $istri->kabupaten = $request->di_kabupaten;
+        $istri->kabupaten_kota = $request->di_kabupaten;
         $istri->provinsi = $request->di_provinsi;
         $istri->pendidikan_terakhir = $request->di_pendidikan_terakhir;
-        $istri->agama = $request->di_agama;
         $istri->organisasi_penghayat = $request->di_organisasi_penghayat;
         $istri->pekerjaan = $request->di_pekerjaan;
         $istri->anak_ke = $request->di_anak_ke;
@@ -178,9 +176,9 @@ class AktaPerkawinanController extends Controller
         $ayahIstri->rw = $request->dadi_rw;
         $ayahIstri->kode_pos = $request->dadi_kode_pos;
         $ayahIstri->telepon = $request->dadi_telepon;
-        $ayahIstri->kelurahan = $request->dadi_kelurahan;
+        $ayahIstri->desa_kelurahan = $request->dadi_kelurahan;
         $ayahIstri->kecamatan = $request->dadi_kecamatan;
-        $ayahIstri->kabupaten = $request->dadi_kabupaten;
+        $ayahIstri->kabupaten_kota = $request->dadi_kabupaten;
         $ayahIstri->provinsi = $request->dadi_provinsi;
         $ayahIstri->pekerjaan = $request->dadi_pekerjaan;
 
@@ -202,9 +200,9 @@ class AktaPerkawinanController extends Controller
         $ibuIstri->rw = $request->didi_rw;
         $ibuIstri->kode_pos = $request->didi_kode_pos;
         $ibuIstri->telepon = $request->didi_telepon;
-        $ibuIstri->kelurahan = $request->didi_kelurahan;
+        $ibuIstri->desa_kelurahan = $request->didi_kelurahan;
         $ibuIstri->kecamatan = $request->didi_kecamatan;
-        $ibuIstri->kabupaten = $request->didi_kabupaten;
+        $ibuIstri->kabupaten_kota = $request->didi_kabupaten;
         $ibuIstri->provinsi = $request->didi_provinsi;
         $ibuIstri->pekerjaan = $request->didi_pekerjaan;
 
@@ -271,7 +269,7 @@ class AktaPerkawinanController extends Controller
         $perkawinan->organisasi_penghayat = $request->dp_nama_pemuka_agama;
         $perkawinan->nama_badan_peradilan = $request->dp_badan_peradilan;
         $perkawinan->nomor_putusan_pengadilan = $request->dp_no_putusan_pengadilan;
-        $perkawinan->tanggal_putusan = $request->dp_no_putusan_pengadilan;
+        $perkawinan->tanggal_putusan = $request->dp_tanggal_putusan;
         $perkawinan->ijin_perwakilan = $request->dp_ijin_perwakilan;
         $perkawinan->jumlah_anak = $request->dp_jumlah_anak;
 

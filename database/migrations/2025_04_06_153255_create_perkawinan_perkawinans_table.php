@@ -17,7 +17,7 @@ return new class extends Migration
             $table->date('tanggal_pemberkatan_perkawinan')->nullable();
             $table->date('tanggal_melapor')->nullable();
             $table->time('pukul')->nullable();
-            $table->enum('agama', ['Islam', 'Kriten', 'Katolik', 'Hindu', 'Budha', 'Konghucu', 'Penghayat Kepercayaan','Lainnya'])->nullable();
+            $table->enum('agama', ['Islam', 'Kristen', 'Katolik', 'Hindu', 'Budha', 'Konghucu', 'Penghayat Kepercayaan','Lainnya'])->nullable();
             $table->string('organisasi_penghayat')->nullable();
             $table->string('nama_badan_peradilan')->nullable();
             $table->string('nomor_putusan_pengadilan')->nullable();
