@@ -18,13 +18,16 @@ use Illuminate\Http\Request;
 class AktaPerkawinanController extends Controller
 {
     public function index() {
+        $userLogin = Auth::user()->id;
+        $hasAktaPerkawinan = AktaPerkawinan::where('user_id', $userLogin)->where('status', 'pending')->first();
+
         $pendidikanTerakhir = $this->getPendidikanTerakhir();
         $agama = $this->getAgama();
         $pekerjaan = $this->getPekerjaan();
         $statusPerkawinan = $this->getStatusPerkawinan();
         $kewarganegaraan = $this->getKewarganegaraan();
 
-        return view('akta-perkawinan.index', compact('pendidikanTerakhir', 'agama', 'pekerjaan', 'statusPerkawinan', 'kewarganegaraan'));
+        return view('akta-perkawinan.index', compact('pendidikanTerakhir', 'agama', 'pekerjaan', 'statusPerkawinan', 'kewarganegaraan', 'hasAktaPerkawinan'));
     }
 
     public function store(Request $request) {

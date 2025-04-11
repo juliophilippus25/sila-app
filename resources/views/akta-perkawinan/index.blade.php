@@ -7,60 +7,73 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <form method="post" action="{{ route('akta-perkawinan.store') }}" class="space-y-6"
-                    enctype="multipart/form-data">
-                    @csrf
-
-                    <div id="stepper-form">
-                        <div id="step-1" class="step-content">
-                            @include('akta-perkawinan.partials.data-suami-form')
-                        </div>
-
-                        <div id="step-2" class="step-content hidden">
-                            @include('akta-perkawinan.partials.data-ayah-dari-suami-form')
-                        </div>
-
-                        <div id="step-3" class="step-content hidden">
-                            @include('akta-perkawinan.partials.data-ibu-dari-suami-form')
-                        </div>
-
-                        <div id="step-4" class="step-content">
-                            @include('akta-perkawinan.partials.data-istri-form')
-                        </div>
-
-                        <div id="step-5" class="step-content hidden">
-                            @include('akta-perkawinan.partials.data-ayah-dari-istri-form')
-                        </div>
-
-                        <div id="step-6" class="step-content hidden">
-                            @include('akta-perkawinan.partials.data-ibu-dari-istri-form')
-                        </div>
-
-                        <div id="step-7" class="step-content hidden">
-                            @include('akta-perkawinan.partials.data-saksi-form')
-                        </div>
-
-                        <div id="step-8" class="step-content hidden">
-                            @include('akta-perkawinan.partials.data-perkawinan-form')
-                        </div>
-
-                        <div id="step-9" class="step-content hidden">
-                            @include('akta-perkawinan.partials.data-administrasi-form')
-                        </div>
+    @if (auth()->user()->role == 'user')
+        <div class="py-12">
+            @if ($hasAktaPerkawinan)
+                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+                    <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                        <p>Anda sudah mendaftar akta perkawinan dan berstatus
+                            <span class="uppercase text-yellow-400"><b>{{ $hasAktaPerkawinan->status }}!</b></span>
+                        </p>
                     </div>
+                </div>
+            @else
+                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+                    <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                        <form method="post" action="{{ route('akta-perkawinan.store') }}" class="space-y-6"
+                            enctype="multipart/form-data">
+                            @csrf
 
-                    <div class="flex justify-between">
-                        <x-secondary-button id="prev-btn" type="button">{{ __('Previous') }}</x-secondary-button>
-                        <x-primary-button id="next-btn" type="button">{{ __('Next') }}</x-primary-button>
-                        <x-primary-button id="submit-btn" type="submit">{{ __('Submit') }}</x-primary-button>
+                            <div id="stepper-form">
+                                <div id="step-1" class="step-content">
+                                    @include('akta-perkawinan.partials.data-suami-form')
+                                </div>
+
+                                <div id="step-2" class="step-content hidden">
+                                    @include('akta-perkawinan.partials.data-ayah-dari-suami-form')
+                                </div>
+
+                                <div id="step-3" class="step-content hidden">
+                                    @include('akta-perkawinan.partials.data-ibu-dari-suami-form')
+                                </div>
+
+                                <div id="step-4" class="step-content">
+                                    @include('akta-perkawinan.partials.data-istri-form')
+                                </div>
+
+                                <div id="step-5" class="step-content hidden">
+                                    @include('akta-perkawinan.partials.data-ayah-dari-istri-form')
+                                </div>
+
+                                <div id="step-6" class="step-content hidden">
+                                    @include('akta-perkawinan.partials.data-ibu-dari-istri-form')
+                                </div>
+
+                                <div id="step-7" class="step-content hidden">
+                                    @include('akta-perkawinan.partials.data-saksi-form')
+                                </div>
+
+                                <div id="step-8" class="step-content hidden">
+                                    @include('akta-perkawinan.partials.data-perkawinan-form')
+                                </div>
+
+                                <div id="step-9" class="step-content hidden">
+                                    @include('akta-perkawinan.partials.data-administrasi-form')
+                                </div>
+                            </div>
+
+                            <div class="flex justify-between">
+                                <x-secondary-button id="prev-btn"
+                                    type="button">{{ __('Previous') }}</x-secondary-button>
+                                <x-primary-button id="next-btn" type="button">{{ __('Next') }}</x-primary-button>
+                                <x-primary-button id="submit-btn" type="submit">{{ __('Submit') }}</x-primary-button>
+                            </div>
+                        </form>
                     </div>
-                </form>
-            </div>
+                </div>
+            @endif
         </div>
-    </div>
+    @endif
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
