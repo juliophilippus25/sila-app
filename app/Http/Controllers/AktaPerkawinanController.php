@@ -18,8 +18,10 @@ use Illuminate\Http\Request;
 class AktaPerkawinanController extends Controller
 {
     public function index() {
+        $dataType = 'Akta Perkawinan';
         $userLogin = Auth::user()->id;
         $hasAktaPerkawinan = AktaPerkawinan::where('user_id', $userLogin)->where('status', 'pending')->first();
+        $aktaPerkawinans = AktaPerkawinan::with(['petugas', 'perkawinanSuami', 'perkawinanIstri'])->get();
 
         $pendidikanTerakhir = $this->getPendidikanTerakhir();
         $agama = $this->getAgama();
@@ -27,7 +29,7 @@ class AktaPerkawinanController extends Controller
         $statusPerkawinan = $this->getStatusPerkawinan();
         $kewarganegaraan = $this->getKewarganegaraan();
 
-        return view('akta-perkawinan.index', compact('pendidikanTerakhir', 'agama', 'pekerjaan', 'statusPerkawinan', 'kewarganegaraan', 'hasAktaPerkawinan'));
+        return view('akta-perkawinan.index', compact('pendidikanTerakhir', 'agama', 'pekerjaan', 'statusPerkawinan', 'kewarganegaraan', 'hasAktaPerkawinan', 'dataType', 'aktaPerkawinans'));
     }
 
     public function store(Request $request) {
