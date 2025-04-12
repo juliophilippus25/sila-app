@@ -21,6 +21,11 @@
                     <x-nav-link :href="route('akta-perkawinan.index')" :active="request()->routeIs('akta-perkawinan.index')">
                         {{ __('Akta Perkawinan') }}
                     </x-nav-link>
+                    @if (Auth::user()->role == 'admin')
+                        <x-nav-link :href="route('petugas.index')" :active="request()->routeIs('petugas.index')">
+                            {{ __('Petugas') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 

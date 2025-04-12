@@ -30,6 +30,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('', [App\Http\Controllers\AktaPerkawinanController::class, 'index'])->name('akta-perkawinan.index');
         Route::post('/store', [App\Http\Controllers\AktaPerkawinanController::class, 'store'])->name('akta-perkawinan.store');
     });
+
+    Route::prefix('/petugas')->group(function () {
+        Route::get('', [App\Http\Controllers\PetugasController::class, 'index'])->name('petugas.index');
+        Route::post('/store', [App\Http\Controllers\PetugasController::class, 'store'])->name('petugas.store');
+    });
 });
 
 require __DIR__.'/auth.php';
