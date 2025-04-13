@@ -10,9 +10,10 @@ use Illuminate\Support\Facades\Hash;
 class PetugasController extends Controller
 {
     public function index() {
+        $dataType = 'Petugas';
         $petugas = User::where('role', 'petugas')->get();
 
-        return view('petugas.index', compact('petugas'));
+        return view('petugas.index', compact('petugas', 'dataType'));
     }
 
     public function store(Request $request) {

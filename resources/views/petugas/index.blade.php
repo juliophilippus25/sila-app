@@ -13,16 +13,16 @@
                 <div class="flex justify-end mb-4">
                     @include('petugas.partials.add-modal-petugas-form')
                 </div>
-                <table class="w-full table-auto border-collapse">
-                    <thead class="text-sm text-muted-2 bg-[#f8f9fa] border-b border-gray-200">
+                <table id="table">
+                    <thead>
                         <tr>
-                            <th class="p-4 text-left font-medium">NAMA</th>
-                            <th class="p-4 text-left font-medium">NIP</th>
-                            <th class="p-4 text-left font-medium">EMAIL</th>
+                            <th>Nama</th>
+                            <th>NIP</th>
+                            <th>Email</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($petugas as $data)
+                        @foreach ($petugas as $data)
                             <tr>
                                 <td class="p-4">
                                     <p>{{ $data->name }}</p>
@@ -34,16 +34,32 @@
                                     <p>{{ $data->email }}</p>
                                 </td>
                             </tr>
-                        @empty
-                            <tr>
-                                <td class="p-4" colspan="3">
-                                    <p class="text-center">Tidak ada data</p>
-                                </td>
-                            </tr>
-                        @endforelse
+                        @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+
+    @section('scripts')
+        <script>
+            $(document).ready(function() {
+                $('#table').DataTable({
+                    searching: true, // Aktifkan pencarian
+                    paging: true, // Aktifkan pagination
+                    pageLength: 10, // Jumlah data per halaman
+                    language: {
+                        search: "Cari", // Label pencarian
+                        searchPlaceholder: "{{ $dataType }}", // Placeholder pencarian
+                        lengthMenu: "Tampilkan _MENU_ data per halaman", // Menu jumlah data per halaman
+                        info: "Menampilkan _START_ hingga _END_ dari _TOTAL_ {{ $dataType }}", // Info pagination
+                        infoEmpty: "Tidak ada {{ $dataType }} yang tersedia", // Pesan saat tidak ada data
+                        infoFiltered: "(difilter dari _MAX_ total data)", // Pesan saat data difilter
+                        zeroRecords: "Tidak ada {{ $dataType }} yang ditemukan.", // Pesan saat tidak ada hasil
+                        emptyTable: "Tidak ada {{ $dataType }} yang tersedia di tabel."
+                    }
+                });
+            });
+        </script>
+    @endsection
 </x-app-layout>
