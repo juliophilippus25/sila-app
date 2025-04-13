@@ -34,7 +34,6 @@ class AktaPerkawinanController extends Controller
             'perkawinanAdministrasi'
         ])
         ->where('user_id', $userLogin)
-        ->where('status', 'pending')
         ->first();
 
         $aktaPerkawinans = AktaPerkawinan::with(['petugas', 'perkawinanSuami', 'perkawinanIstri'])->get();
