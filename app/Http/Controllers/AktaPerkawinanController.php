@@ -336,8 +336,9 @@ class AktaPerkawinanController extends Controller
             'perkawinanAdministrasi'
         ])->find($id);
         $anakData = json_decode($aktaPerkawinan->perkawinanPerkawinan->anak, true);
+        $persyaratanData = json_decode($aktaPerkawinan->perkawinanAdministrasi->persyaratan, true);
 
-        return view('akta-perkawinan.show', compact('aktaPerkawinan', 'anakData'));
+        return view('akta-perkawinan.show', compact('aktaPerkawinan', 'anakData', 'persyaratanData'));
     }
 
 }

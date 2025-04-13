@@ -13,7 +13,7 @@
                 {{-- Tabs --}}
                 <div x-data="{ tab: 'akta' }">
                     <div class="border-b border-gray-200 mb-4">
-                        <nav class="-mb-px flex space-x-8">
+                        <nav class="-mb-px flex space-x-8 overflow-x-scroll no-scrollbar">
                             <button @click="tab = 'akta'"
                                 :class="tab === 'akta' ? 'border-indigo-500 text-indigo-600' :
                                     'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'"
@@ -68,6 +68,12 @@
                                 class="whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm">
                                 Data Perkawinan
                             </button>
+                            <button @click="tab = 'administrasi'"
+                                :class="tab === 'administrasi' ? 'border-indigo-500 text-indigo-600' :
+                                    'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'"
+                                class="whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm">
+                                Data Administrasi
+                            </button>
                         </nav>
                     </div>
 
@@ -98,6 +104,9 @@
                         </div>
                         <div x-show="tab === 'perkawinan'">
                             @include('akta-perkawinan.tabs.data-perkawinan')
+                        </div>
+                        <div x-show="tab === 'administrasi'">
+                            @include('akta-perkawinan.tabs.data-administrasi')
                         </div>
                     </div>
                 </div>
