@@ -20,7 +20,25 @@ class AktaPerkawinanController extends Controller
     public function index() {
         $dataType = 'Akta Perkawinan';
         $userLogin = Auth::user()->id;
-        $hasAktaPerkawinan = AktaPerkawinan::where('user_id', $userLogin)->where('status', 'pending')->first();
+        $hasAktaPerkawinan = AktaPerkawinan::with([
+            'user',
+            'petugas',
+            'perkawinanSuami',
+            'perkawinanAyahSuami',
+            'perkawinanIbuSuami',
+            'perkawinanIstri',
+            'perkawinanAyahIstri',
+            'perkawinanIbuIstri',
+            'perkawinanSaksi',
+            'perkawinanPerkawinan',
+            'perkawinanAdministrasi'])
+        ->where('user_id', $userLogin)
+        ->where('status', 'pending')
+        ->first();
+
+        $anakData = json_decode($hasAktaPerkawinan->perkawinanPerkawinan->anak, true);
+        $persyaratanData = json_decode($hasAktaPerkawinan->perkawinanAdministrasi->persyaratan, true);
+
         $aktaPerkawinans = AktaPerkawinan::with(['petugas', 'perkawinanSuami', 'perkawinanIstri'])->get();
 
         $pendidikanTerakhir = $this->getPendidikanTerakhir();
@@ -29,7 +47,18 @@ class AktaPerkawinanController extends Controller
         $statusPerkawinan = $this->getStatusPerkawinan();
         $kewarganegaraan = $this->getKewarganegaraan();
 
-        return view('akta-perkawinan.index', compact('pendidikanTerakhir', 'agama', 'pekerjaan', 'statusPerkawinan', 'kewarganegaraan', 'hasAktaPerkawinan', 'dataType', 'aktaPerkawinans'));
+        return view('akta-perkawinan.index', compact(
+            'pendidikanTerakhir',
+            'agama',
+            'pekerjaan',
+            'statusPerkawinan',
+            'kewarganegaraan',
+            'hasAktaPerkawinan',
+            'dataType',
+            'aktaPerkawinans',
+            'anakData',
+            'persyaratanData'
+        ));
     }
 
     public function store(Request $request) {
