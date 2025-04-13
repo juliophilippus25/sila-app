@@ -341,4 +341,56 @@ class AktaPerkawinanController extends Controller
         return view('akta-perkawinan.show', compact('aktaPerkawinan', 'anakData', 'persyaratanData'));
     }
 
+    private function generateNoAkta()
+    {
+        $prefix = 'AKTA-PERKAWINAN-';
+
+        $lastAktaPerkawinan = AktaPerkawinan::where('id', 'like', '%')
+            ->orderBy('id', 'desc')
+            ->first();
+
+        if ($lastAktaPerkawinan) {
+            $lastNumber = (int)substr($lastAktaPerkawinan->id, -4);
+            $newNumber = str_pad($lastNumber + 1, 4, '0', STR_PAD_LEFT);
+        } else {
+            $newNumber = '0001';
+        }
+
+        return $prefix . $newNumber;
+    }
+
+    public function acceptAktaPerkawinan($id) {
+        $aktaPerkawinan = AktaPerkawinan::find($id);
+        $aktaPerkawinan->status = 'approved';
+        $aktaPerkawinan->nomor_akta = $this->generateNoAkta();
+        $aktaPerkawinan->tanggal_akta = now();
+
+        $aktaPerkawinan->save();
+
+        toast('Data Akta Perkawinan berhasil diverifikasi!','success')->hideCloseButton()->autoClose(3000);
+        return redirect()->route('akta-perkawinan.index');
+    }
+
+    public function rejectAktaPerkawinan($id) {
+        $aktaPerkawinan = AktaPerkawinan::find($id);
+        $aktaPerkawinan->status = 'rejected';
+        $aktaPerkawinan->save();
+
+        toast('Data Akta Perkawinan berhasil ditolak!','success')->hideCloseButton()->autoClose(3000);
+        return redirect()->route('akta-perkawinan.index');
+    }
+
+    public function acceptOrReject(Request $request, $id)
+    {
+        $action = $request->input('action');
+
+        if ($action == 'verify') {
+            return $this->acceptAktaPerkawinan($id);
+        } elseif ($action == 'reject') {
+            return $this->rejectAktaPerkawinan($id);
+        }
+
+        toast('Aksi tidak dikenali.','error')->timerProgressBar()->autoClose(3000);
+        return redirect()->back();
+    }
 }
