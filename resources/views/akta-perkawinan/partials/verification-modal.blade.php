@@ -3,7 +3,7 @@
 </x-primary-button>
 
 <x-modal name="verification-perkawinan" focusable>
-    <form method="post" action="{{ route('petugas.store') }}" class="p-6">
+    <div class="p-6">
         @csrf
 
         <h2 class="text-lg font-bold text-gray-900">
@@ -17,13 +17,19 @@
                 {{ __('Tutup') }}
             </x-secondary-button>
 
-            <x-danger-button class="ms-3">
-                {{ __('Tolak') }}
-            </x-danger-button>
+            <form action="{{ route('akta-perkawinan.reject', $aktaPerkawinan->id) }}" method="post">
+                @csrf
+                <x-danger-button class="ms-3">
+                    {{ __('Tolak') }}
+                </x-danger-button>
+            </form>
 
-            <x-primary-button class="ms-3">
-                {{ __('Verifikasi') }}
-            </x-primary-button>
+            <form action="{{ route('akta-perkawinan.accept', $aktaPerkawinan->id) }}" method="post">
+                @csrf
+                <x-primary-button class="ms-3">
+                    {{ __('Verifikasi') }}
+                </x-primary-button>
+            </form>
         </div>
-    </form>
+    </div>
 </x-modal>

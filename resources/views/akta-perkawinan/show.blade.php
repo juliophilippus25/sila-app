@@ -9,9 +9,12 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="flex justify-end mb-4">
-                @include('akta-perkawinan.partials.verification-modal')
-            </div>
+            @if (auth()->user()->role == 'petugas' && $aktaPerkawinan->status == 'pending')
+                <div class="flex justify-end mb-4">
+                    @include('akta-perkawinan.partials.verification-modal')
+                </div>
+            @endif
+
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 {{-- Tabs --}}
                 <div x-data="{ tab: 'akta' }">
@@ -114,6 +117,13 @@
                     </div>
                 </div>
                 {{-- End Tabs --}}
+            </div>
+
+            <div class="flex justify-start mt-4">
+                <a href="{{ route('akta-perkawinan.index') }}"
+                    class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150">
+                    Kembali
+                </a>
             </div>
         </div>
     </div>

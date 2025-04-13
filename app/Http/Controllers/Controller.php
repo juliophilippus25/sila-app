@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AktaPerkawinan;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 
@@ -64,5 +65,23 @@ abstract class Controller
 
     public function generateId() {
         return (string) Str::uuid();
+    }
+
+    public function generateNoAktaPerkawinan()
+    {
+        $prefix = 'AKTA-PERKAWINAN-';
+
+        $lastAktaPerkawinan = AktaPerkawinan::where('id', 'like', '%')
+            ->orderBy('id', 'desc')
+            ->first();
+
+        if ($lastAktaPerkawinan) {
+            $lastNumber = (int)substr($lastAktaPerkawinan->id, -4);
+            $newNumber = str_pad($lastNumber + 1, 4, '0', STR_PAD_LEFT);
+        } else {
+            $newNumber = '0001';
+        }
+
+        return $prefix . $newNumber;
     }
 }

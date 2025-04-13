@@ -29,7 +29,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('/akta-perkawinan')->group(function () {
         Route::get('', [App\Http\Controllers\AktaPerkawinanController::class, 'index'])->name('akta-perkawinan.index');
         Route::post('/store', [App\Http\Controllers\AktaPerkawinanController::class, 'store'])->name('akta-perkawinan.store');
-        Route::get('/{id}', [App\Http\Controllers\AktaPerkawinanController::class, 'show'])->name('akta-perkawinan.show');
+        Route::get('/{aktaPerkawinanId}', [App\Http\Controllers\AktaPerkawinanController::class, 'show'])->name('akta-perkawinan.show');
+        Route::post('/{aktaPerkawinanId}/accept', [App\Http\Controllers\AktaPerkawinanController::class, 'acceptAktaPerkawinan'])->name('akta-perkawinan.accept');
+        Route::post('/{aktaPerkawinanId}/reject', [App\Http\Controllers\AktaPerkawinanController::class, 'rejectAktaPerkawinan'])->name('akta-perkawinan.reject');
     });
 
     Route::prefix('/petugas')->group(function () {

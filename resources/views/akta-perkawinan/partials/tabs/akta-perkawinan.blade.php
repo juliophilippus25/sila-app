@@ -5,7 +5,7 @@
     </div>
     <div class="flex">
         <span class="w-64 font-semibold text-gray-700">Tanggal Keluar Akta</span>
-        <span class="text-gray-900">: {{ $hasAktaPerkawinan->tanggal_akta ?? '-' }}</span>
+        <span class="text-gray-900">: {{ tglIndo($hasAktaPerkawinan->tanggal_akta ?? '-') }}</span>
     </div>
     <div class="flex">
         <span class="w-64 font-semibold text-gray-700">Tanggal Cetak Akta</span>

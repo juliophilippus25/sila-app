@@ -31,34 +31,36 @@ class AktaPerkawinanController extends Controller
             'perkawinanIbuIstri',
             'perkawinanSaksi',
             'perkawinanPerkawinan',
-            'perkawinanAdministrasi'])
+            'perkawinanAdministrasi'
+        ])
         ->where('user_id', $userLogin)
         ->where('status', 'pending')
         ->first();
 
-        $anakData = json_decode($hasAktaPerkawinan->perkawinanPerkawinan->anak, true);
-        $persyaratanData = json_decode($hasAktaPerkawinan->perkawinanAdministrasi->persyaratan, true);
-
         $aktaPerkawinans = AktaPerkawinan::with(['petugas', 'perkawinanSuami', 'perkawinanIstri'])->get();
-
         $pendidikanTerakhir = $this->getPendidikanTerakhir();
         $agama = $this->getAgama();
         $pekerjaan = $this->getPekerjaan();
         $statusPerkawinan = $this->getStatusPerkawinan();
         $kewarganegaraan = $this->getKewarganegaraan();
 
-        return view('akta-perkawinan.index', compact(
-            'pendidikanTerakhir',
-            'agama',
-            'pekerjaan',
-            'statusPerkawinan',
-            'kewarganegaraan',
-            'hasAktaPerkawinan',
-            'dataType',
-            'aktaPerkawinans',
-            'anakData',
-            'persyaratanData'
-        ));
+        $data = [
+            'pendidikanTerakhir' => $pendidikanTerakhir,
+            'agama' => $agama,
+            'pekerjaan' => $pekerjaan,
+            'statusPerkawinan' => $statusPerkawinan,
+            'kewarganegaraan' => $kewarganegaraan,
+            'hasAktaPerkawinan' => $hasAktaPerkawinan,
+            'dataType' => $dataType,
+            'aktaPerkawinans' => $aktaPerkawinans,
+        ];
+
+        if (auth()->user()->role == 'user' && $hasAktaPerkawinan) {
+            $data['anakData'] = json_decode($hasAktaPerkawinan->perkawinanPerkawinan->anak, true);
+            $data['persyaratanData'] = json_decode($hasAktaPerkawinan->perkawinanAdministrasi->persyaratan, true);
+        }
+
+        return view('akta-perkawinan.index', $data);
     }
 
     public function store(Request $request) {
@@ -349,7 +351,7 @@ class AktaPerkawinanController extends Controller
         $administrasi->save();
     }
 
-    public function show($id)
+    public function show($aktaPerkawinanId)
     {
         $aktaPerkawinan = AktaPerkawinan::with([
             'user',
@@ -363,63 +365,37 @@ class AktaPerkawinanController extends Controller
             'perkawinanSaksi',
             'perkawinanPerkawinan',
             'perkawinanAdministrasi'
-        ])->find($id);
+        ])->find($aktaPerkawinanId);
+
         $anakData = json_decode($aktaPerkawinan->perkawinanPerkawinan->anak, true);
         $persyaratanData = json_decode($aktaPerkawinan->perkawinanAdministrasi->persyaratan, true);
 
         return view('akta-perkawinan.show', compact('aktaPerkawinan', 'anakData', 'persyaratanData'));
     }
 
-    private function generateNoAkta()
-    {
-        $prefix = 'AKTA-PERKAWINAN-';
+    public function acceptAktaPerkawinan($aktaPerkawinanId) {
+        $userLogin = Auth::user()->id;
 
-        $lastAktaPerkawinan = AktaPerkawinan::where('id', 'like', '%')
-            ->orderBy('id', 'desc')
-            ->first();
-
-        if ($lastAktaPerkawinan) {
-            $lastNumber = (int)substr($lastAktaPerkawinan->id, -4);
-            $newNumber = str_pad($lastNumber + 1, 4, '0', STR_PAD_LEFT);
-        } else {
-            $newNumber = '0001';
-        }
-
-        return $prefix . $newNumber;
-    }
-
-    public function acceptAktaPerkawinan($id) {
-        $aktaPerkawinan = AktaPerkawinan::find($id);
+        $aktaPerkawinan = AktaPerkawinan::find($aktaPerkawinanId);
         $aktaPerkawinan->status = 'approved';
-        $aktaPerkawinan->nomor_akta = $this->generateNoAkta();
+        $aktaPerkawinan->nomor_akta = $this->generateNoAktaPerkawinan();
         $aktaPerkawinan->tanggal_akta = now();
-
+        $aktaPerkawinan->petugas_id = $userLogin;
         $aktaPerkawinan->save();
 
         toast('Data Akta Perkawinan berhasil diverifikasi!','success')->hideCloseButton()->autoClose(3000);
-        return redirect()->route('akta-perkawinan.index');
+        return redirect()->back();
     }
 
-    public function rejectAktaPerkawinan($id) {
-        $aktaPerkawinan = AktaPerkawinan::find($id);
+    public function rejectAktaPerkawinan($aktaPerkawinanId) {
+        $userLogin = Auth::user()->aktaPerkawinanId;
+
+        $aktaPerkawinan = AktaPerkawinan::find($aktaPerkawinanId);
         $aktaPerkawinan->status = 'rejected';
+        $aktaPerkawinan->petugas_id = $userLogin;
         $aktaPerkawinan->save();
 
         toast('Data Akta Perkawinan berhasil ditolak!','success')->hideCloseButton()->autoClose(3000);
-        return redirect()->route('akta-perkawinan.index');
-    }
-
-    public function acceptOrReject(Request $request, $id)
-    {
-        $action = $request->input('action');
-
-        if ($action == 'verify') {
-            return $this->acceptAktaPerkawinan($id);
-        } elseif ($action == 'reject') {
-            return $this->rejectAktaPerkawinan($id);
-        }
-
-        toast('Aksi tidak dikenali.','error')->timerProgressBar()->autoClose(3000);
         return redirect()->back();
     }
 }
