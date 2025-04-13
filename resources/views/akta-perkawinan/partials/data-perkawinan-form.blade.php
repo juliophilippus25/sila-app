@@ -105,20 +105,20 @@
 
                         <div>
                             <x-input-label for="dp_nama_anak_${i}" :value="__('Nama Anak')" />
-                            <x-text-input id="dp_nama_anak_${i}" name="anak[${i}][nama_anak]" type="text" class="mt-1 block w-full" required/>
+                            <x-text-input id="dp_nama_anak_${i}" name="anak[${i - 1}][nama_anak]" type="text" class="mt-1 block w-full" required/>
                             <x-input-error class="mt-2" :messages="$errors->get('dp_nama_anak_${i}')" />
                         </div>
 
                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-2">
                             <div>
                                 <x-input-label for="dp_no_akta_lahir_${i}" :value="__('Nomor Akta Kelahiran')" />
-                                <x-text-input id="dp_no_akta_lahir_${i}" name="anak[${i}][no_akta]" type="text" class="mt-1 block w-full" required/>
+                                <x-text-input id="dp_no_akta_lahir_${i}" name="anak[${i - 1}][no_akta]" type="text" class="mt-1 block w-full" required/>
                                 <x-input-error class="mt-2" :messages="$errors->get('dp_no_akta_lahir_${i}')" />
                             </div>
 
                             <div>
                                 <x-input-label for="dp_tanggal_akta_lahir_${i}" :value="__('Tanggal Akta Kelahiran')" />
-                                <x-text-input id="dp_tanggal_akta_lahir_${i}" name="anak[${i}][tanggal_akta]" type="date" class="mt-1 block w-full" required/>
+                                <x-text-input id="dp_tanggal_akta_lahir_${i}" name="anak[${i - 1}][tanggal_akta]" type="date" class="mt-1 block w-full" required/>
                                 <x-input-error class="mt-2" :messages="$errors->get('dp_tanggal_akta_lahir_${i}')" />
                             </div>
                         </div>

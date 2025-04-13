@@ -27,6 +27,7 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+        toast('Login berhasil!','success')->hideCloseButton()->autoClose(3000);
 
         return redirect()->intended(route('dashboard', absolute: false));
     }

@@ -50,6 +50,7 @@ class AktaPerkawinanController extends Controller
         $this->storePerkawinan($request, $aktaPerkawinan->id);
         $this->storeAdministrasi($request, $aktaPerkawinan->id);
 
+        toast('Data Akta Perkawinan Anda berhasil disimpan!','success')->hideCloseButton()->autoClose(3000);
         return redirect()->route('akta-perkawinan.index');
     }
 
@@ -282,9 +283,9 @@ class AktaPerkawinanController extends Controller
         if ($request->has('anak')) {
             foreach ($request->anak as $anak) {
                 $anakData[] = [
-                    'nama_anak' => $anak['nama_anak'],
-                    'no_akta' => $anak['no_akta'],
-                    'tanggal_akta' => $anak['tanggal_akta']
+                    'nama_anak' => $anak['nama_anak'] ?? null,
+                    'no_akta' => $anak['no_akta'] ?? null,
+                    'tanggal_akta' => $anak['tanggal_akta'] ?? null
                 ];
             }
         }
