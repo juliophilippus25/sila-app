@@ -17,4 +17,13 @@ class FormatTanggal
         if (!$tanggal) return '-';
         return Carbon::parse($tanggal)->translatedFormat('d F Y H:i');
     }
+
+    public static function jamIndo($pukul)
+    {
+        if (!$pukul) return '-';
+
+        Carbon::setLocale('id');
+
+        return Carbon::parse($pukul)->translatedFormat('H:i');
+    }
 }

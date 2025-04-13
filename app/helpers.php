@@ -8,3 +8,17 @@ if (!function_exists('tglIndo')) {
         return FormatTanggal::tglIndo($tanggal);
     }
 }
+
+if (!function_exists('tglJamIndo')) {
+    function tglJamIndo($tanggal)
+    {
+        return FormatTanggal::tglJamIndo($tanggal);
+    }
+}
+
+if (!function_exists('jamIndo')) {
+    function jamIndo($pukul)
+    {
+        return FormatTanggal::jamIndo($pukul);
+    }
+}

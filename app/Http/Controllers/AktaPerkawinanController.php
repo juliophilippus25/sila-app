@@ -272,7 +272,8 @@ class AktaPerkawinanController extends Controller
         $perkawinan->tanggal_melapor = $request->dp_tanggal_melapor;
         $perkawinan->pukul = $request->dp_pukul;
         $perkawinan->agama = $request->dp_agama;
-        $perkawinan->organisasi_penghayat = $request->dp_nama_pemuka_agama;
+        $perkawinan->organisasi_penghayat = $request->dp_organisasi_penghayat;
+        $perkawinan->nama_pemuka_agama = $request->dp_nama_pemuka_agama;
         $perkawinan->nama_badan_peradilan = $request->dp_badan_peradilan;
         $perkawinan->nomor_putusan_pengadilan = $request->dp_no_putusan_pengadilan;
         $perkawinan->tanggal_putusan = $request->dp_tanggal_putusan;
@@ -334,8 +335,9 @@ class AktaPerkawinanController extends Controller
             'perkawinanPerkawinan',
             'perkawinanAdministrasi'
         ])->find($id);
+        $anakData = json_decode($aktaPerkawinan->perkawinanPerkawinan->anak, true);
 
-        return view('akta-perkawinan.show', compact('aktaPerkawinan'));
+        return view('akta-perkawinan.show', compact('aktaPerkawinan', 'anakData'));
     }
 
 }
