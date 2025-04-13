@@ -29,6 +29,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('/akta-perkawinan')->group(function () {
         Route::get('', [App\Http\Controllers\AktaPerkawinanController::class, 'index'])->name('akta-perkawinan.index');
         Route::post('/store', [App\Http\Controllers\AktaPerkawinanController::class, 'store'])->name('akta-perkawinan.store');
+        Route::get('/{id}', [App\Http\Controllers\AktaPerkawinanController::class, 'show'])->name('akta-perkawinan.show');
     });
 
     Route::prefix('/petugas')->group(function () {

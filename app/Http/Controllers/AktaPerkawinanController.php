@@ -317,4 +317,24 @@ class AktaPerkawinanController extends Controller
         $administrasi->persyaratan = json_encode($persyaratanData);
         $administrasi->save();
     }
+
+    public function show($id)
+    {
+        $aktaPerkawinan = AktaPerkawinan::with([
+            'user',
+            'petugas',
+            'perkawinanSuami',
+            'perkawinanAyahSuami',
+            'perkawinanIbuSuami',
+            'perkawinanIstri',
+            'perkawinanAyahIstri',
+            'perkawinanIbuIstri',
+            'perkawinanSaksi',
+            'perkawinanPerkawinan',
+            'perkawinanAdministrasi'
+        ])->find($id);
+
+        return view('akta-perkawinan.show', compact('aktaPerkawinan'));
+    }
+
 }
