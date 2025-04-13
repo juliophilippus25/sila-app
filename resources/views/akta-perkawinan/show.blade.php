@@ -46,8 +46,7 @@
                             @include('akta-perkawinan.tabs.akta-perkawinan')
                         </div>
                         <div x-show="tab === 'suami'">
-                            {{-- Konten Data Suami --}}
-                            <p class="text-gray-700">Isi detail Data Suami di sini.</p>
+                            @include('akta-perkawinan.tabs.data-suami')
                         </div>
                         <div x-show="tab === 'ayah_suami'">
                             {{-- Konten Data Ayah Dari Suami --}}

@@ -18,7 +18,7 @@
                     <x-nav-link :href="route('akta-lahir.index')" :active="request()->routeIs('akta-lahir.index')">
                         {{ __('Akta Lahir') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('akta-perkawinan.index')" :active="request()->routeIs('akta-perkawinan.index')">
+                    <x-nav-link :href="route('akta-perkawinan.index')" :active="request()->routeIs('akta-perkawinan.*')">
                         {{ __('Akta Perkawinan') }}
                     </x-nav-link>
                     @if (Auth::user()->role == 'admin')
