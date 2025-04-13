@@ -38,6 +38,12 @@
                                 class="whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm">
                                 Data Ibu Dari Suami
                             </button>
+                            <button @click="tab = 'istri'"
+                                :class="tab === 'istri' ? 'border-indigo-500 text-indigo-600' :
+                                    'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'"
+                                class="whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm">
+                                Data Istri
+                            </button>
                         </nav>
                     </div>
 
@@ -53,6 +59,9 @@
                         </div>
                         <div x-show="tab === 'ibu_suami'">
                             @include('akta-perkawinan.tabs.data-ibu-suami')
+                        </div>
+                        <div x-show="tab === 'istri'">
+                            @include('akta-perkawinan.tabs.data-istri')
                         </div>
                     </div>
                 </div>
