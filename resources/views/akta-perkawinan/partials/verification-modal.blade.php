@@ -4,8 +4,6 @@
 
 <x-modal name="verification-perkawinan" focusable>
     <div class="p-6">
-        @csrf
-
         <h2 class="text-lg font-bold text-gray-900">
             {{ __('Verifikasi') }}
         </h2>
@@ -17,14 +15,14 @@
                 {{ __('Tutup') }}
             </x-secondary-button>
 
-            <form action="{{ route('akta-perkawinan.reject', $aktaPerkawinan->id) }}" method="post">
+            <form action="{{ route('akta-perkawinan.reject', $aktaPerkawinan->id) }}" method="post" id="submit-form">
                 @csrf
                 <x-danger-button class="ms-3">
                     {{ __('Tolak') }}
                 </x-danger-button>
             </form>
 
-            <form action="{{ route('akta-perkawinan.accept', $aktaPerkawinan->id) }}" method="post">
+            <form action="{{ route('akta-perkawinan.accept', $aktaPerkawinan->id) }}" method="post" id="submit-form">
                 @csrf
                 <x-primary-button class="ms-3">
                     {{ __('Verifikasi') }}

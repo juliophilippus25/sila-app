@@ -18,6 +18,12 @@
 
 <body class="font-sans text-gray-900 antialiased">
     <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
+        <div id="loader" class="fixed z-50 inset-0 bg-black/30 flex justify-center items-center hidden">
+            <div
+                class="animate-spin rounded-full h-16 w-16 border-4 border-t-4 border-b-4 border-b-blue-400 border-t-indigo-400">
+            </div>
+        </div>
+
         <div>
             <a href="/">
                 <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
@@ -29,5 +35,13 @@
         </div>
     </div>
 </body>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#submit-form').submit(function(event) {
+            $('#loader').removeClass('hidden');
+        });
+    });
+</script>
 
 </html>

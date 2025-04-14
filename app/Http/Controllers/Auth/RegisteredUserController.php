@@ -45,6 +45,7 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
+        toast('Pendaftaran berhasil!','success')->hideCloseButton()->autoClose(3000);
         return redirect(route('dashboard', absolute: false));
     }
 }

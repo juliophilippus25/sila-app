@@ -34,6 +34,7 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
+        toast('Profile berhasil diperbarui!','success')->hideCloseButton()->autoClose(3000);
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
@@ -55,6 +56,7 @@ class ProfileController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
+        toast('Akun berhasil dihapus!','success')->hideCloseButton()->autoClose(3000);
         return Redirect::to('/');
     }
 }

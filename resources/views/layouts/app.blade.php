@@ -18,6 +18,12 @@
 </head>
 
 <body class="font-sans antialiased">
+    <div id="loader" class="fixed z-50 inset-0 bg-black/30 flex justify-center items-center hidden">
+        <div
+            class="animate-spin rounded-full h-16 w-16 border-4 border-t-4 border-b-4 border-b-blue-400 border-t-indigo-400">
+        </div>
+    </div>
+
     <div class="min-h-screen bg-gray-100">
         @include('layouts.navigation')
 
@@ -38,9 +44,15 @@
         <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/2.2.1/js/dataTables.min.js"></script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            $(document).ready(function() {
+                $('#submit-form').submit(function(event) {
+                    $('#loader').removeClass('hidden');
+                });
+            });
+        </script>
         @include('sweetalert::alert')
         @yield('scripts')
-
     </div>
 </body>
 
