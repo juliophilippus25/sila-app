@@ -2,6 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AktaPerkawinan\DataAdministrasiRequest;
+use App\Http\Requests\AktaPerkawinan\DataAyahIstriRequest;
+use App\Http\Requests\AktaPerkawinan\DataAyahSuamiRequest;
+use App\Http\Requests\AktaPerkawinan\DataIbuIstriRequest;
+use App\Http\Requests\AktaPerkawinan\DataIbuSuamiRequest;
+use App\Http\Requests\AktaPerkawinan\DataIstriRequest;
+use App\Http\Requests\AktaPerkawinan\DataPerkawinanRequest;
+use App\Http\Requests\AktaPerkawinan\DataSaksiRequest;
+use App\Http\Requests\AktaPerkawinan\DataSuamiRequest;
 use App\Models\AktaPerkawinan;
 use App\Models\PerkawinanAdministrasi;
 use App\Models\PerkawinanAyahIstri;
@@ -14,6 +23,7 @@ use App\Models\PerkawinanSaksi;
 use App\Models\PerkawinanSuami;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class AktaPerkawinanController extends Controller
 {
@@ -62,7 +72,40 @@ class AktaPerkawinanController extends Controller
         return view('akta-perkawinan.index', $data);
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
+        $rules = array_merge(
+            (new DataSuamiRequest())->rules(),
+            (new DataAyahSuamiRequest())->rules(),
+            (new DataIbuSuamiRequest())->rules(),
+            (new DataIstriRequest())->rules(),
+            (new DataAyahIstriRequest())->rules(),
+            (new DataIbuIstriRequest())->rules(),
+            (new DataSaksiRequest())->rules(),
+            (new DataPerkawinanRequest())->rules(),
+            (new DataAdministrasiRequest())->rules()
+        );
+
+        $messages = array_merge(
+            (new DataSuamiRequest())->messages(),
+            (new DataAyahSuamiRequest())->messages(),
+            (new DataIbuSuamiRequest())->messages(),
+            (new DataIstriRequest())->messages(),
+            (new DataAyahIstriRequest())->messages(),
+            (new DataIbuIstriRequest())->messages(),
+            (new DataSaksiRequest())->messages(),
+            (new DataPerkawinanRequest())->messages(),
+            (new DataAdministrasiRequest())->messages()
+        );
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            toast('Periksa kembali data anda.', 'error')->hideCloseButton()->autoClose(3000);
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        // Simpan data
         $userLogin = Auth::user()->id;
 
         $aktaPerkawinan = new AktaPerkawinan();
@@ -80,87 +123,87 @@ class AktaPerkawinanController extends Controller
         $this->storePerkawinan($request, $aktaPerkawinan->id);
         $this->storeAdministrasi($request, $aktaPerkawinan->id);
 
-        toast('Data Akta Perkawinan Anda berhasil disimpan!','success')->hideCloseButton()->autoClose(3000);
+        toast('Data Akta Perkawinan Anda berhasil disimpan!', 'success')->hideCloseButton()->autoClose(3000);
         return redirect()->route('akta-perkawinan.index');
     }
 
-    private function storeSuami($request, $aktaPerkawinanId) {
+    private function storeSuami($dataSuamiRequest, $aktaPerkawinanId) {
         $suami = new PerkawinanSuami();
 
         $suami->akta_perkawinan_id = $aktaPerkawinanId;
-        $suami->nik = $request->ds_nik;
-        $suami->nomor_kk = $request->ds_nomor_kk;
-        $suami->nomor_paspor = $request->ds_nomor_paspor;
-        $suami->nama_lengkap = $request->ds_nama_lengkap;
-        $suami->tanggal_lahir = $request->ds_tanggal_lahir;
-        $suami->tempat_lahir = $request->ds_tempat_lahir;
-        $suami->alamat = $request->ds_alamat;
-        $suami->rt = $request->ds_rt;
-        $suami->rw = $request->ds_rw;
-        $suami->kode_pos = $request->ds_kode_pos;
-        $suami->telepon = $request->ds_telepon;
-        $suami->desa_kelurahan = $request->ds_kelurahan;
-        $suami->kecamatan = $request->ds_kecamatan;
-        $suami->kabupaten_kota = $request->ds_kabupaten;
-        $suami->provinsi = $request->ds_provinsi;
-        $suami->pendidikan_terakhir = $request->ds_pendidikan_terakhir;
-        $suami->agama = $request->ds_agama;
-        $suami->organisasi_penghayat = $request->ds_organisasi_penghayat;
-        $suami->pekerjaan = $request->ds_pekerjaan;
-        $suami->anak_ke = $request->ds_anak_ke;
-        $suami->status_perkawinan = $request->ds_status_perkawinan;
-        $suami->perkawinan_ke = $request->ds_perkawinan_ke;
-        $suami->istri_ke = $request->ds_istri_ke;
-        $suami->kewarganegaraan = $request->ds_kewarganegaraan;
-        $suami->kebangsaan = $request->ds_kebangsaan;
+        $suami->nik = $dataSuamiRequest->ds_nik;
+        $suami->nomor_kk = $dataSuamiRequest->ds_nomor_kk;
+        $suami->nomor_paspor = $dataSuamiRequest->ds_nomor_paspor;
+        $suami->nama_lengkap = $dataSuamiRequest->ds_nama_lengkap;
+        $suami->tanggal_lahir = $dataSuamiRequest->ds_tanggal_lahir;
+        $suami->tempat_lahir = $dataSuamiRequest->ds_tempat_lahir;
+        $suami->alamat = $dataSuamiRequest->ds_alamat;
+        $suami->rt = $dataSuamiRequest->ds_rt;
+        $suami->rw = $dataSuamiRequest->ds_rw;
+        $suami->kode_pos = $dataSuamiRequest->ds_kode_pos;
+        $suami->telepon = $dataSuamiRequest->ds_telepon;
+        $suami->desa_kelurahan = $dataSuamiRequest->ds_kelurahan;
+        $suami->kecamatan = $dataSuamiRequest->ds_kecamatan;
+        $suami->kabupaten_kota = $dataSuamiRequest->ds_kabupaten;
+        $suami->provinsi = $dataSuamiRequest->ds_provinsi;
+        $suami->pendidikan_terakhir = $dataSuamiRequest->ds_pendidikan_terakhir;
+        $suami->agama = $dataSuamiRequest->ds_agama;
+        $suami->organisasi_penghayat = $dataSuamiRequest->ds_organisasi_penghayat;
+        $suami->pekerjaan = $dataSuamiRequest->ds_pekerjaan;
+        $suami->anak_ke = $dataSuamiRequest->ds_anak_ke;
+        $suami->status_perkawinan = $dataSuamiRequest->ds_status_perkawinan;
+        $suami->perkawinan_ke = $dataSuamiRequest->ds_perkawinan_ke;
+        $suami->istri_ke = $dataSuamiRequest->ds_istri_ke;
+        $suami->kewarganegaraan = $dataSuamiRequest->ds_kewarganegaraan;
+        $suami->kebangsaan = $dataSuamiRequest->ds_kebangsaan;
 
         $suami->save();
     }
 
-    private function storeAyahSuami($request, $aktaPerkawinanId) {
+    private function storeAyahSuami($dataAyahSuamiRequest, $aktaPerkawinanId) {
         $ayahSuami = new PerkawinanAyahSuami();
 
         $ayahSuami->akta_perkawinan_id = $aktaPerkawinanId;
-        $ayahSuami->nik = $request->dads_nik;
-        $ayahSuami->nama_lengkap = $request->dads_nama_lengkap;
-        $ayahSuami->agama = $request->dads_agama;
-        $ayahSuami->organisasi_penghayat = $request->dads_organisasi_penghayat;
-        $ayahSuami->tanggal_lahir = $request->dads_tanggal_lahir;
-        $ayahSuami->tempat_lahir = $request->dads_tempat_lahir;
-        $ayahSuami->alamat = $request->dads_alamat;
-        $ayahSuami->rt = $request->dads_rt;
-        $ayahSuami->rw = $request->dads_rw;
-        $ayahSuami->kode_pos = $request->dads_kode_pos;
-        $ayahSuami->telepon = $request->dads_telepon;
-        $ayahSuami->desa_kelurahan = $request->dads_kelurahan;
-        $ayahSuami->kecamatan = $request->dads_kecamatan;
-        $ayahSuami->kabupaten_kota = $request->dads_kabupaten;
-        $ayahSuami->provinsi = $request->dads_provinsi;
-        $ayahSuami->pekerjaan = $request->dads_pekerjaan;
+        $ayahSuami->nik = $dataAyahSuamiRequest->dads_nik;
+        $ayahSuami->nama_lengkap = $dataAyahSuamiRequest->dads_nama_lengkap;
+        $ayahSuami->agama = $dataAyahSuamiRequest->dads_agama;
+        $ayahSuami->organisasi_penghayat = $dataAyahSuamiRequest->dads_organisasi_penghayat;
+        $ayahSuami->tanggal_lahir = $dataAyahSuamiRequest->dads_tanggal_lahir;
+        $ayahSuami->tempat_lahir = $dataAyahSuamiRequest->dads_tempat_lahir;
+        $ayahSuami->alamat = $dataAyahSuamiRequest->dads_alamat;
+        $ayahSuami->rt = $dataAyahSuamiRequest->dads_rt;
+        $ayahSuami->rw = $dataAyahSuamiRequest->dads_rw;
+        $ayahSuami->kode_pos = $dataAyahSuamiRequest->dads_kode_pos;
+        $ayahSuami->telepon = $dataAyahSuamiRequest->dads_telepon;
+        $ayahSuami->desa_kelurahan = $dataAyahSuamiRequest->dads_kelurahan;
+        $ayahSuami->kecamatan = $dataAyahSuamiRequest->dads_kecamatan;
+        $ayahSuami->kabupaten_kota = $dataAyahSuamiRequest->dads_kabupaten;
+        $ayahSuami->provinsi = $dataAyahSuamiRequest->dads_provinsi;
+        $ayahSuami->pekerjaan = $dataAyahSuamiRequest->dads_pekerjaan;
 
         $ayahSuami->save();
     }
 
-    private function storeIbuSuami($request, $aktaPerkawinanId) {
+    private function storeIbuSuami($dataIbuSuamiRequest, $aktaPerkawinanId) {
         $ibuSuami = new PerkawinanIbuSuami();
 
         $ibuSuami->akta_perkawinan_id = $aktaPerkawinanId;
-        $ibuSuami->nik = $request->dids_nik;
-        $ibuSuami->nama_lengkap = $request->dids_nama_lengkap;
-        $ibuSuami->agama = $request->dids_agama;
-        $ibuSuami->organisasi_penghayat = $request->dids_organisasi_penghayat;
-        $ibuSuami->tanggal_lahir = $request->dids_tanggal_lahir;
-        $ibuSuami->tempat_lahir = $request->dids_tempat_lahir;
-        $ibuSuami->alamat = $request->dids_alamat;
-        $ibuSuami->rt = $request->dids_rt;
-        $ibuSuami->rw = $request->dids_rw;
-        $ibuSuami->kode_pos = $request->dids_kode_pos;
-        $ibuSuami->telepon = $request->dids_telepon;
-        $ibuSuami->desa_kelurahan = $request->dids_kelurahan;
-        $ibuSuami->kecamatan = $request->dids_kecamatan;
-        $ibuSuami->kabupaten_kota = $request->dids_kabupaten;
-        $ibuSuami->provinsi = $request->dids_provinsi;
-        $ibuSuami->pekerjaan = $request->dids_pekerjaan;
+        $ibuSuami->nik = $dataIbuSuamiRequest->dids_nik;
+        $ibuSuami->nama_lengkap = $dataIbuSuamiRequest->dids_nama_lengkap;
+        $ibuSuami->agama = $dataIbuSuamiRequest->dids_agama;
+        $ibuSuami->organisasi_penghayat = $dataIbuSuamiRequest->dids_organisasi_penghayat;
+        $ibuSuami->tanggal_lahir = $dataIbuSuamiRequest->dids_tanggal_lahir;
+        $ibuSuami->tempat_lahir = $dataIbuSuamiRequest->dids_tempat_lahir;
+        $ibuSuami->alamat = $dataIbuSuamiRequest->dids_alamat;
+        $ibuSuami->rt = $dataIbuSuamiRequest->dids_rt;
+        $ibuSuami->rw = $dataIbuSuamiRequest->dids_rw;
+        $ibuSuami->kode_pos = $dataIbuSuamiRequest->dids_kode_pos;
+        $ibuSuami->telepon = $dataIbuSuamiRequest->dids_telepon;
+        $ibuSuami->desa_kelurahan = $dataIbuSuamiRequest->dids_kelurahan;
+        $ibuSuami->kecamatan = $dataIbuSuamiRequest->dids_kecamatan;
+        $ibuSuami->kabupaten_kota = $dataIbuSuamiRequest->dids_kabupaten;
+        $ibuSuami->provinsi = $dataIbuSuamiRequest->dids_provinsi;
+        $ibuSuami->pekerjaan = $dataIbuSuamiRequest->dids_pekerjaan;
 
         $ibuSuami->save();
     }
@@ -197,95 +240,95 @@ class AktaPerkawinanController extends Controller
         $istri->save();
     }
 
-    private function storeAyahIstri($request, $aktaPerkawinanId) {
+    private function storeAyahIstri($dataAyahIstriRequest, $aktaPerkawinanId) {
         $ayahIstri = new PerkawinanAyahIstri();
 
         $ayahIstri->akta_perkawinan_id = $aktaPerkawinanId;
-        $ayahIstri->nik = $request->dadi_nik;
-        $ayahIstri->nama_lengkap = $request->dadi_nama_lengkap;
-        $ayahIstri->agama = $request->dadi_agama;
-        $ayahIstri->organisasi_penghayat = $request->dadi_organisasi_penghayat;
-        $ayahIstri->tanggal_lahir = $request->dadi_tanggal_lahir;
-        $ayahIstri->tempat_lahir = $request->dadi_tempat_lahir;
-        $ayahIstri->alamat = $request->dadi_alamat;
-        $ayahIstri->rt = $request->dadi_rt;
-        $ayahIstri->rw = $request->dadi_rw;
-        $ayahIstri->kode_pos = $request->dadi_kode_pos;
-        $ayahIstri->telepon = $request->dadi_telepon;
-        $ayahIstri->desa_kelurahan = $request->dadi_kelurahan;
-        $ayahIstri->kecamatan = $request->dadi_kecamatan;
-        $ayahIstri->kabupaten_kota = $request->dadi_kabupaten;
-        $ayahIstri->provinsi = $request->dadi_provinsi;
-        $ayahIstri->pekerjaan = $request->dadi_pekerjaan;
+        $ayahIstri->nik = $dataAyahIstriRequest->dadi_nik;
+        $ayahIstri->nama_lengkap = $dataAyahIstriRequest->dadi_nama_lengkap;
+        $ayahIstri->agama = $dataAyahIstriRequest->dadi_agama;
+        $ayahIstri->organisasi_penghayat = $dataAyahIstriRequest->dadi_organisasi_penghayat;
+        $ayahIstri->tanggal_lahir = $dataAyahIstriRequest->dadi_tanggal_lahir;
+        $ayahIstri->tempat_lahir = $dataAyahIstriRequest->dadi_tempat_lahir;
+        $ayahIstri->alamat = $dataAyahIstriRequest->dadi_alamat;
+        $ayahIstri->rt = $dataAyahIstriRequest->dadi_rt;
+        $ayahIstri->rw = $dataAyahIstriRequest->dadi_rw;
+        $ayahIstri->kode_pos = $dataAyahIstriRequest->dadi_kode_pos;
+        $ayahIstri->telepon = $dataAyahIstriRequest->dadi_telepon;
+        $ayahIstri->desa_kelurahan = $dataAyahIstriRequest->dadi_kelurahan;
+        $ayahIstri->kecamatan = $dataAyahIstriRequest->dadi_kecamatan;
+        $ayahIstri->kabupaten_kota = $dataAyahIstriRequest->dadi_kabupaten;
+        $ayahIstri->provinsi = $dataAyahIstriRequest->dadi_provinsi;
+        $ayahIstri->pekerjaan = $dataAyahIstriRequest->dadi_pekerjaan;
 
         $ayahIstri->save();
     }
 
-    private function storeIbuIstri($request, $aktaPerkawinanId) {
+    private function storeIbuIstri($dataIbuIstriRequest, $aktaPerkawinanId) {
         $ibuIstri = new PerkawinanIbuIstri();
 
         $ibuIstri->akta_perkawinan_id = $aktaPerkawinanId;
-        $ibuIstri->nik = $request->didi_nik;
-        $ibuIstri->nama_lengkap = $request->didi_nama_lengkap;
-        $ibuIstri->agama = $request->didi_agama;
-        $ibuIstri->organisasi_penghayat = $request->didi_organisasi_penghayat;
-        $ibuIstri->tanggal_lahir = $request->didi_tanggal_lahir;
-        $ibuIstri->tempat_lahir = $request->didi_tempat_lahir;
-        $ibuIstri->alamat = $request->didi_alamat;
-        $ibuIstri->rt = $request->didi_rt;
-        $ibuIstri->rw = $request->didi_rw;
-        $ibuIstri->kode_pos = $request->didi_kode_pos;
-        $ibuIstri->telepon = $request->didi_telepon;
-        $ibuIstri->desa_kelurahan = $request->didi_kelurahan;
-        $ibuIstri->kecamatan = $request->didi_kecamatan;
-        $ibuIstri->kabupaten_kota = $request->didi_kabupaten;
-        $ibuIstri->provinsi = $request->didi_provinsi;
-        $ibuIstri->pekerjaan = $request->didi_pekerjaan;
+        $ibuIstri->nik = $dataIbuIstriRequest->didi_nik;
+        $ibuIstri->nama_lengkap = $dataIbuIstriRequest->didi_nama_lengkap;
+        $ibuIstri->agama = $dataIbuIstriRequest->didi_agama;
+        $ibuIstri->organisasi_penghayat = $dataIbuIstriRequest->didi_organisasi_penghayat;
+        $ibuIstri->tanggal_lahir = $dataIbuIstriRequest->didi_tanggal_lahir;
+        $ibuIstri->tempat_lahir = $dataIbuIstriRequest->didi_tempat_lahir;
+        $ibuIstri->alamat = $dataIbuIstriRequest->didi_alamat;
+        $ibuIstri->rt = $dataIbuIstriRequest->didi_rt;
+        $ibuIstri->rw = $dataIbuIstriRequest->didi_rw;
+        $ibuIstri->kode_pos = $dataIbuIstriRequest->didi_kode_pos;
+        $ibuIstri->telepon = $dataIbuIstriRequest->didi_telepon;
+        $ibuIstri->desa_kelurahan = $dataIbuIstriRequest->didi_kelurahan;
+        $ibuIstri->kecamatan = $dataIbuIstriRequest->didi_kecamatan;
+        $ibuIstri->kabupaten_kota = $dataIbuIstriRequest->didi_kabupaten;
+        $ibuIstri->provinsi = $dataIbuIstriRequest->didi_provinsi;
+        $ibuIstri->pekerjaan = $dataIbuIstriRequest->didi_pekerjaan;
 
         $ibuIstri->save();
     }
 
-    private function storeSaksi($request, $aktaPerkawinanId) {
+    private function storeSaksi($dataSaksiRequest, $aktaPerkawinanId) {
         $saksi = new PerkawinanSaksi();
 
         $saksi->akta_perkawinan_id = $aktaPerkawinanId;
 
         $saksi_1 = [
-            'nik' => $request->ds_1['nik'],
-            'nama_lengkap' => $request->ds_1['nama_lengkap'],
-            'tempat_lahir' => $request->ds_1['tempat_lahir'],
-            'tanggal_lahir' => $request->ds_1['tanggal_lahir'],
-            'alamat' => $request->ds_1['alamat'],
-            'rt' => $request->ds_1['rt'],
-            'rw' => $request->ds_1['rw'],
-            'kode_pos' => $request->ds_1['kode_pos'],
-            'telepon' => $request->ds_1['telepon'],
-            'kelurahan' => $request->ds_1['kelurahan'],
-            'kecamatan' => $request->ds_1['kecamatan'],
-            'kabupaten' => $request->ds_1['kabupaten'],
-            'provinsi' => $request->ds_1['provinsi'],
-            'pekerjaan' => $request->ds_1['pekerjaan'],
-            'agama' => $request->ds_1['agama'],
-            'organisasi_penghayat' => $request->ds_1['organisasi_penghayat'],
+            'nik' => $dataSaksiRequest->ds_1['nik'],
+            'nama_lengkap' => $dataSaksiRequest->ds_1['nama_lengkap'],
+            'tempat_lahir' => $dataSaksiRequest->ds_1['tempat_lahir'],
+            'tanggal_lahir' => $dataSaksiRequest->ds_1['tanggal_lahir'],
+            'alamat' => $dataSaksiRequest->ds_1['alamat'],
+            'rt' => $dataSaksiRequest->ds_1['rt'],
+            'rw' => $dataSaksiRequest->ds_1['rw'],
+            'kode_pos' => $dataSaksiRequest->ds_1['kode_pos'],
+            'telepon' => $dataSaksiRequest->ds_1['telepon'],
+            'kelurahan' => $dataSaksiRequest->ds_1['kelurahan'],
+            'kecamatan' => $dataSaksiRequest->ds_1['kecamatan'],
+            'kabupaten' => $dataSaksiRequest->ds_1['kabupaten'],
+            'provinsi' => $dataSaksiRequest->ds_1['provinsi'],
+            'pekerjaan' => $dataSaksiRequest->ds_1['pekerjaan'],
+            'agama' => $dataSaksiRequest->ds_1['agama'],
+            'organisasi_penghayat' => $dataSaksiRequest->ds_1['organisasi_penghayat'],
         ];
 
         $saksi_2 = [
-            'nik' => $request->ds_2['nik'],
-            'nama_lengkap' => $request->ds_2['nama_lengkap'],
-            'tempat_lahir' => $request->ds_2['tempat_lahir'],
-            'tanggal_lahir' => $request->ds_2['tanggal_lahir'],
-            'alamat' => $request->ds_2['alamat'],
-            'rt' => $request->ds_2['rt'],
-            'rw' => $request->ds_2['rw'],
-            'kode_pos' => $request->ds_2['kode_pos'],
-            'telepon' => $request->ds_2['telepon'],
-            'kelurahan' => $request->ds_2['kelurahan'],
-            'kecamatan' => $request->ds_2['kecamatan'],
-            'kabupaten' => $request->ds_2['kabupaten'],
-            'provinsi' => $request->ds_2['provinsi'],
-            'pekerjaan' => $request->ds_2['pekerjaan'],
-            'agama' => $request->ds_2['agama'],
-            'organisasi_penghayat' => $request->ds_2['organisasi_penghayat'],
+            'nik' => $dataSaksiRequest->ds_2['nik'],
+            'nama_lengkap' => $dataSaksiRequest->ds_2['nama_lengkap'],
+            'tempat_lahir' => $dataSaksiRequest->ds_2['tempat_lahir'],
+            'tanggal_lahir' => $dataSaksiRequest->ds_2['tanggal_lahir'],
+            'alamat' => $dataSaksiRequest->ds_2['alamat'],
+            'rt' => $dataSaksiRequest->ds_2['rt'],
+            'rw' => $dataSaksiRequest->ds_2['rw'],
+            'kode_pos' => $dataSaksiRequest->ds_2['kode_pos'],
+            'telepon' => $dataSaksiRequest->ds_2['telepon'],
+            'kelurahan' => $dataSaksiRequest->ds_2['kelurahan'],
+            'kecamatan' => $dataSaksiRequest->ds_2['kecamatan'],
+            'kabupaten' => $dataSaksiRequest->ds_2['kabupaten'],
+            'provinsi' => $dataSaksiRequest->ds_2['provinsi'],
+            'pekerjaan' => $dataSaksiRequest->ds_2['pekerjaan'],
+            'agama' => $dataSaksiRequest->ds_2['agama'],
+            'organisasi_penghayat' => $dataSaksiRequest->ds_2['organisasi_penghayat'],
         ];
 
         $saksi->saksi_1 = json_encode($saksi_1);
@@ -294,25 +337,25 @@ class AktaPerkawinanController extends Controller
         $saksi->save();
     }
 
-    private function storePerkawinan($request, $aktaPerkawinanId) {
+    private function storePerkawinan($dataPerkawinanRequest, $aktaPerkawinanId) {
         $perkawinan = new PerkawinanPerkawinan();
 
         $perkawinan->akta_perkawinan_id = $aktaPerkawinanId;
-        $perkawinan->tanggal_pemberkatan_perkawinan = $request->dp_tanggal_pemberkatan;
-        $perkawinan->tanggal_melapor = $request->dp_tanggal_melapor;
-        $perkawinan->pukul = $request->dp_pukul;
-        $perkawinan->agama = $request->dp_agama;
-        $perkawinan->organisasi_penghayat = $request->dp_organisasi_penghayat;
-        $perkawinan->nama_pemuka_agama = $request->dp_nama_pemuka_agama;
-        $perkawinan->nama_badan_peradilan = $request->dp_badan_peradilan;
-        $perkawinan->nomor_putusan_pengadilan = $request->dp_no_putusan_pengadilan;
-        $perkawinan->tanggal_putusan = $request->dp_tanggal_putusan;
-        $perkawinan->ijin_perwakilan = $request->dp_ijin_perwakilan;
-        $perkawinan->jumlah_anak = $request->dp_jumlah_anak;
+        $perkawinan->tanggal_pemberkatan_perkawinan = $dataPerkawinanRequest->dp_tanggal_pemberkatan;
+        $perkawinan->tanggal_melapor = $dataPerkawinanRequest->dp_tanggal_melapor;
+        $perkawinan->pukul = $dataPerkawinanRequest->dp_pukul;
+        $perkawinan->agama = $dataPerkawinanRequest->dp_agama;
+        $perkawinan->organisasi_penghayat = $dataPerkawinanRequest->dp_organisasi_penghayat;
+        $perkawinan->nama_pemuka_agama = $dataPerkawinanRequest->dp_nama_pemuka_agama;
+        $perkawinan->nama_badan_peradilan = $dataPerkawinanRequest->dp_badan_peradilan;
+        $perkawinan->nomor_putusan_pengadilan = $dataPerkawinanRequest->dp_no_putusan_pengadilan;
+        $perkawinan->tanggal_putusan = $dataPerkawinanRequest->dp_tanggal_putusan;
+        $perkawinan->ijin_perwakilan = $dataPerkawinanRequest->dp_ijin_perwakilan;
+        $perkawinan->jumlah_anak = $dataPerkawinanRequest->dp_jumlah_anak;
 
         $anakData = [];
-        if ($request->has('anak')) {
-            foreach ($request->anak as $anak) {
+        if ($dataPerkawinanRequest->has('anak')) {
+            foreach ($dataPerkawinanRequest->anak as $anak) {
                 $anakData[] = [
                     'nama_anak' => $anak['nama_anak'] ?? null,
                     'no_akta' => $anak['no_akta'] ?? null,
@@ -325,14 +368,14 @@ class AktaPerkawinanController extends Controller
         $perkawinan->save();
     }
 
-    private function storeAdministrasi($request, $aktaPerkawinanId) {
+    private function storeAdministrasi($dataAdministrasiRequest, $aktaPerkawinanId) {
         $administrasi = new PerkawinanAdministrasi();
 
         $administrasi->akta_perkawinan_id = $aktaPerkawinanId;
 
         $persyaratanData = [];
-        if ($request->has('persyaratan')) {
-            foreach ($request->persyaratan as $item) {
+        if ($dataAdministrasiRequest->has('persyaratan')) {
+            foreach ($dataAdministrasiRequest->persyaratan as $item) {
                 $path = null;
 
                 if (isset($item['file']) && $item['file'] instanceof \Illuminate\Http\UploadedFile) {

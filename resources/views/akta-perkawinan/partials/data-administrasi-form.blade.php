@@ -59,7 +59,7 @@
                         <td class="p-4">
                             <input type="file" name="persyaratan[{{ $i }}][file]"
                                 class="mt-1 block w-full" accept="image/*,application/pdf">
-                            <x-input-error class="mt-2" :messages="$errors->get('persyaratan.' . $i . '.status')" />
+                            <x-input-error class="mt-2" :messages="$errors->get('persyaratan.' . $i . '.file')" />
                         </td>
                     </tr>
                 @endforeach

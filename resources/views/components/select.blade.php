@@ -7,5 +7,4 @@
             <option value="{{ $value }}" {{ old($name) == $value ? 'selected' : '' }}>{{ $label }}</option>
         @endforeach
     </select>
-    <x-input-error :messages="$errors->get($name)" class="mt-2" />
 </div>
