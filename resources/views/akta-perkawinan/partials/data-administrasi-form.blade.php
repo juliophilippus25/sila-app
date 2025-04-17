@@ -51,7 +51,12 @@
                 @foreach ($daftarPersyaratan as $i => $namaPersyaratan)
                     <tr>
                         <td class="p-4">
-                            <p>{{ $namaPersyaratan }}</p>
+                            <p>
+                                {{ $namaPersyaratan }}
+                                @if (in_array($namaPersyaratan, $persyaratanWajib))
+                                    <span class="text-red-600">*</span>
+                                @endif
+                            </p>
                             <input type="hidden" name="persyaratan[{{ $i }}][persyaratan]"
                                 value="{{ $namaPersyaratan }}"
                                 {{ in_array($namaPersyaratan, $persyaratanWajib) ? 'required' : '' }}>

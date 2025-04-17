@@ -11,13 +11,13 @@
 
     <div class="mt-6 space-y-6">
         <div>
-            <x-input-label for="di_nik" :value="__('Nomor Induk Kependudukan (NIK)')" />
+            <x-input-label for="di_nik" :value="__('Nomor Induk Kependudukan (NIK)') . ' <span class=\'text-red-600\'>*</span>'" />
             <x-text-input id="di_nik" name="di_nik" type="number" class="mt-1 block w-full" :value="old('di_nik')" />
             <x-input-error class="mt-2" :messages="$errors->get('di_nik')" />
         </div>
 
         <div>
-            <x-input-label for="di_nomor_kk" :value="__('Nomor Kartu Keluarga (Nomor KK)')" />
+            <x-input-label for="di_nomor_kk" :value="__('Nomor Kartu Keluarga (Nomor KK)') . ' <span class=\'text-red-600\'>*</span>'" />
             <x-text-input id="di_nomor_kk" name="di_nomor_kk" type="text" class="mt-1 block w-full"
                 :value="old('di_nomor_kk')" />
             <x-input-error class="mt-2" :messages="$errors->get('di_nomor_kk')" />
@@ -31,7 +31,7 @@
         </div>
 
         <div>
-            <x-input-label for="di_nama_lengkap" :value="__('Nama Lengkap')" />
+            <x-input-label for="di_nama_lengkap" :value="__('Nama Lengkap') . ' <span class=\'text-red-600\'>*</span>'" />
             <x-text-input id="di_nama_lengkap" name="di_nama_lengkap" type="text" class="mt-1 block w-full"
                 :value="old('di_nama_lengkap')" />
             <x-input-error class="mt-2" :messages="$errors->get('di_nama_lengkap')" />
@@ -39,14 +39,14 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div>
-                <x-input-label for="di_tempat_lahir" :value="__('Tempat Lahir')" />
+                <x-input-label for="di_tempat_lahir" :value="__('Tempat Lahir') . ' <span class=\'text-red-600\'>*</span>'" />
                 <x-text-input id="di_tempat_lahir" name="di_tempat_lahir" type="text" class="mt-1 block w-full"
                     :value="old('di_tempat_lahir')" />
                 <x-input-error class="mt-2" :messages="$errors->get('di_tempat_lahir')" />
             </div>
 
             <div>
-                <x-input-label for="di_tanggal_lahir" :value="__('Tanggal Lahir')" />
+                <x-input-label for="di_tanggal_lahir" :value="__('Tanggal Lahir') . ' <span class=\'text-red-600\'>*</span>'" />
                 <x-text-input id="di_tanggal_lahir" name="di_tanggal_lahir" type="date" class="mt-1 block w-full"
                     :value="old('di_tanggal_lahir')" />
                 <x-input-error class="mt-2" :messages="$errors->get('di_tanggal_lahir')" />
@@ -54,35 +54,35 @@
         </div>
 
         <div>
-            <x-input-label for="di_alamat" :value="__('Alamat')" />
+            <x-input-label for="di_alamat" :value="__('Alamat') . ' <span class=\'text-red-600\'>*</span>'" />
             <x-text-input id="di_alamat" name="di_alamat" type="text" class="mt-1 block w-full" :value="old('di_alamat')" />
             <x-input-error class="mt-2" :messages="$errors->get('di_alamat')" />
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
             <div>
-                <x-input-label for="di_rt" :value="__('RT')" />
+                <x-input-label for="di_rt" :value="__('RT') . ' <span class=\'text-red-600\'>*</span>'" />
                 <x-text-input id="di_rt" name="di_rt" type="text" class="mt-1 block w-full"
                     :value="old('di_rt')" />
                 <x-input-error class="mt-2" :messages="$errors->get('di_rt')" />
             </div>
 
             <div>
-                <x-input-label for="di_rw" :value="__('RW')" />
+                <x-input-label for="di_rw" :value="__('RW') . ' <span class=\'text-red-600\'>*</span>'" />
                 <x-text-input id="di_rw" name="di_rw" type="text" class="mt-1 block w-full"
                     :value="old('di_rw')" />
                 <x-input-error class="mt-2" :messages="$errors->get('di_rw')" />
             </div>
 
             <div>
-                <x-input-label for="di_kode_pos" :value="__('Kode Pos')" />
+                <x-input-label for="di_kode_pos" :value="__('Kode Pos') . ' <span class=\'text-red-600\'>*</span>'" />
                 <x-text-input id="di_kode_pos" name="di_kode_pos" type="text" class="mt-1 block w-full"
                     :value="old('di_kode_pos')" />
                 <x-input-error class="mt-2" :messages="$errors->get('di_kode_pos')" />
             </div>
 
             <div>
-                <x-input-label for="di_telepon" :value="__('Telepon')" />
+                <x-input-label for="di_telepon" :value="__('Telepon') . ' <span class=\'text-red-600\'>*</span>'" />
                 <x-text-input id="di_telepon" name="di_telepon" type="number" class="mt-1 block w-full"
                     :value="old('di_telepon')" />
                 <x-input-error class="mt-2" :messages="$errors->get('di_telepon')" />
@@ -91,28 +91,28 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
             <div>
-                <x-input-label for="di_kelurahan" :value="__('Desa/Kelurahan')" />
+                <x-input-label for="di_kelurahan" :value="__('Desa/Kelurahan') . ' <span class=\'text-red-600\'>*</span>'" />
                 <x-text-input id="di_kelurahan" name="di_kelurahan" type="text" class="mt-1 block w-full"
                     :value="old('di_kelurahan')" />
                 <x-input-error class="mt-2" :messages="$errors->get('di_kelurahan')" />
             </div>
 
             <div>
-                <x-input-label for="di_kecamatan" :value="__('Kecamatan')" />
+                <x-input-label for="di_kecamatan" :value="__('Kecamatan') . ' <span class=\'text-red-600\'>*</span>'" />
                 <x-text-input id="di_kecamatan" name="di_kecamatan" type="text" class="mt-1 block w-full"
                     :value="old('di_kecamatan')" />
                 <x-input-error class="mt-2" :messages="$errors->get('di_kecamatan')" />
             </div>
 
             <div>
-                <x-input-label for="di_kabupaten" :value="__('Kabupaten/Kota')" />
+                <x-input-label for="di_kabupaten" :value="__('Kabupaten/Kota') . ' <span class=\'text-red-600\'>*</span>'" />
                 <x-text-input id="di_kabupaten" name="di_kabupaten" type="text" class="mt-1 block w-full"
                     :value="old('di_kabupaten')" />
                 <x-input-error class="mt-2" :messages="$errors->get('di_kabupaten')" />
             </div>
 
             <div>
-                <x-input-label for="di_provinsi" :value="__('Provinsi')" />
+                <x-input-label for="di_provinsi" :value="__('Provinsi') . ' <span class=\'text-red-600\'>*</span>'" />
                 <x-text-input id="di_provinsi" name="di_provinsi" type="text" class="mt-1 block w-full"
                     :value="old('di_provinsi')" />
                 <x-input-error class="mt-2" :messages="$errors->get('di_provinsi')" />
@@ -121,13 +121,13 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div>
-                <x-select name="di_pendidikan_terakhir" label="Pendidikan Terakhir" :options="$pendidikanTerakhir"
+                <x-select name="di_pendidikan_terakhir" :label="__('Pendidikan Terakhir') . ' <span class=\'text-red-600\'>*</span>'" :options="$pendidikanTerakhir"
                     placeholder="Pilih Pendidikan Terakhir" :selected="old('di_pendidikan_terakhir')" />
                 <x-input-error class="mt-2" :messages="$errors->get('di_pendidikan_terakhir')" />
             </div>
 
             <div>
-                <x-select name="di_agama" label="Agama" :options="$agama" placeholder="Pilih Agama"
+                <x-select name="di_agama" :label="__('Agama') . ' <span class=\'text-red-600\'>*</span>'" :options="$agama" placeholder="Pilih Agama"
                     :selected="old('di_agama')" />
                 <x-input-error class="mt-2" :messages="$errors->get('di_agama')" />
             </div>
@@ -142,7 +142,7 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div>
-                <x-select name="di_pekerjaan" label="Pekerjaan" :options="$pekerjaan" placeholder="Pilih Pekerjaan"
+                <x-select name="di_pekerjaan" :label="__('Pekerjaan') . ' <span class=\'text-red-600\'>*</span>'" :options="$pekerjaan" placeholder="Pilih Pekerjaan"
                     :selected="old('di_pekerjaan')" />
                 <x-input-error class="mt-2" :messages="$errors->get('di_pekerjaan')" />
             </div>
@@ -157,13 +157,13 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div>
-                <x-select name="di_status_perkawinan" label="Status Perkawinan Sebelum Nikah" :options="$statusPerkawinan"
+                <x-select name="di_status_perkawinan" :label="__('Status Perkawinan Sebelum Nikah') . ' <span class=\'text-red-600\'>*</span>'" :options="$statusPerkawinan"
                     placeholder="Pilih Status Perkawinan" :selected="old('di_status_perkawinan')" />
                 <x-input-error class="mt-2" :messages="$errors->get('di_status_perkawinan')" />
             </div>
 
             <div>
-                <x-input-label for="di_perkawinan_ke" :value="__('Perkawinan Yang Ke')" />
+                <x-input-label for="di_perkawinan_ke" :value="__('Perkawinan Yang Ke') . ' <span class=\'text-red-600\'>*</span>'" />
                 <x-text-input id="di_perkawinan_ke" name="di_perkawinan_ke" type="number" class="mt-1 block w-full"
                     :value="old('di_perkawinan_ke')" />
                 <x-input-error class="mt-2" :messages="$errors->get('di_perkawinan_ke')" />
@@ -172,7 +172,7 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div>
-                <x-select name="di_kewarganegaraan" label="Kewarganegaraan" :options="$kewarganegaraan"
+                <x-select name="di_kewarganegaraan" :label="__('Kewarganegaraan') . ' <span class=\'text-red-600\'>*</span>'" :options="$kewarganegaraan"
                     placeholder="Pilih Status Kewarganegaraan" :selected="old('di_kewarganegaraan')" />
                 <x-input-error class="mt-2" :messages="$errors->get('di_kewarganegaraan')" />
             </div>
