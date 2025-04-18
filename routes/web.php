@@ -32,6 +32,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/{aktaPerkawinanId}', [App\Http\Controllers\AktaPerkawinanController::class, 'show'])->name('akta-perkawinan.show');
         Route::post('/{aktaPerkawinanId}/accept', [App\Http\Controllers\AktaPerkawinanController::class, 'acceptAktaPerkawinan'])->name('akta-perkawinan.accept');
         Route::post('/{aktaPerkawinanId}/reject', [App\Http\Controllers\AktaPerkawinanController::class, 'rejectAktaPerkawinan'])->name('akta-perkawinan.reject');
+        Route::get('/{aktaPerkawinanId}/pdf', [App\Http\Controllers\AktaPerkawinanController::class, 'generatePDF'])->name('akta-perkawinan.pdf');
     });
 
     Route::prefix('/petugas')->group(function () {

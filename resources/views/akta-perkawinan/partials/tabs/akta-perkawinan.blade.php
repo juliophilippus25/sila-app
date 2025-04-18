@@ -36,4 +36,19 @@
             @endif
         </span>
     </div>
+    @php
+        $fileName = 'akta-perkawinan-' . \Str::slug($hasAktaPerkawinan->user->name) . '.pdf';
+    @endphp
+
+    @if ($hasAktaPerkawinan->status == 'approved')
+        <div class="flex">
+            <span class="w-64 font-semibold text-gray-700">Download</span>
+            <span class="text-gray-900">:
+                <a href="{{ asset('storage/akta-perkawinan/' . $fileName) }}" target="_blank"
+                    class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+                    Lihat PDF
+                </a>
+            </span>
+        </div>
+    @endif
 </div>

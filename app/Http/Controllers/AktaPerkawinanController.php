@@ -24,6 +24,8 @@ use App\Models\PerkawinanSuami;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+use Spatie\Browsershot\Browsershot;
 
 class AktaPerkawinanController extends Controller
 {
@@ -425,6 +427,8 @@ class AktaPerkawinanController extends Controller
         $aktaPerkawinan->petugas_id = $userLogin;
         $aktaPerkawinan->save();
 
+        $this->generatePDF($aktaPerkawinanId);
+
         toast('Data Akta Perkawinan berhasil diverifikasi!','success')->hideCloseButton()->autoClose(3000);
         return redirect()->back();
     }
@@ -439,5 +443,34 @@ class AktaPerkawinanController extends Controller
 
         toast('Data Akta Perkawinan berhasil ditolak!','success')->hideCloseButton()->autoClose(3000);
         return redirect()->back();
+    }
+
+    private function generatePDF($aktaPerkawinanId) {
+        $aktaPerkawinan = AktaPerkawinan::with([
+            'user',
+            'petugas',
+            'perkawinanSuami',
+            'perkawinanAyahSuami',
+            'perkawinanIbuSuami',
+            'perkawinanIstri',
+            'perkawinanAyahIstri',
+            'perkawinanIbuIstri',
+            'perkawinanSaksi',
+            'perkawinanPerkawinan',
+            'perkawinanAdministrasi'
+        ])->find($aktaPerkawinanId);
+
+        $html = view('pdf.akta-perkawinan', compact('aktaPerkawinan'))->render();
+        $fileName = 'akta-perkawinan-' . Str::slug($aktaPerkawinan->user->name) . '.pdf';
+        $filePath = public_path('storage/akta-perkawinan/' . $fileName);
+
+        Browsershot::html($html)
+            ->format('A4')
+            ->margins(10, 10, 10, 10)
+            ->save($filePath);
+
+        return response()->json([
+            'url' => asset('storage/akta-perkawinan/' . $fileName)
+        ]);
     }
 }
