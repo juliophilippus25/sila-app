@@ -473,4 +473,18 @@ class AktaPerkawinanController extends Controller
             'url' => asset('storage/akta-perkawinan/' . $fileName)
         ]);
     }
+
+    public function viewPDF($aktaPerkawinanId)
+    {
+        $akta = AktaPerkawinan::findOrFail($aktaPerkawinanId);
+
+        $akta->tanggal_cetak = now();
+        $akta->save();
+
+        $fileName = 'akta-perkawinan-' . Str::slug($akta->user->name) . '.pdf';
+        $filePath = asset('storage/akta-perkawinan/' . $fileName);
+
+        return redirect($filePath);
+    }
+
 }

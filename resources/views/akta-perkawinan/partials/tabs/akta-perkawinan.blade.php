@@ -11,7 +11,7 @@
     </div>
     <div class="flex">
         <span class="w-64 font-semibold text-gray-700">Tanggal Cetak Akta</span>
-        <span class="text-gray-900">: {{ $hasAktaPerkawinan->tanggal_cetak ?? '-' }}</span>
+        <span class="text-gray-900">: {{ tglIndo($hasAktaPerkawinan->tanggal_cetak ?? '-') }}</span>
     </div>
     <div class="flex">
         <span class="w-64 font-semibold text-gray-700">Diverifikasi Oleh</span>
@@ -44,7 +44,7 @@
         <div class="flex">
             <span class="w-64 font-semibold text-gray-700">Download</span>
             <span class="text-gray-900">:
-                <a href="{{ asset('storage/akta-perkawinan/' . $fileName) }}" target="_blank"
+                <a href="{{ route('akta-perkawinan.viewPDF', $hasAktaPerkawinan->id) }}" target="_blank"
                     class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
                     Lihat PDF
                 </a>

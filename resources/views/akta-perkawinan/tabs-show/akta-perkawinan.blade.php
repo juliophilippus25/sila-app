@@ -11,7 +11,7 @@
     </div>
     <div class="flex">
         <span class="w-64 font-semibold text-gray-700">Tanggal Cetak Akta</span>
-        <span class="text-gray-900">: {{ $aktaPerkawinan->tanggal_cetak ?? '-' }}</span>
+        <span class="text-gray-900">: {{ tglIndo($aktaPerkawinan->tanggal_cetak ?? '-') }}</span>
     </div>
     <div class="flex">
         <span class="w-64 font-semibold text-gray-700">Diverifikasi Oleh</span>
