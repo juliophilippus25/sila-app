@@ -84,7 +84,8 @@
 
             <div class="mb-4">
                 <p>
-                    Yang telah dilangsungkan dihadapan pemuka agama {{ $aktaPerkawinan->perkawinanSuami->agama }} yang
+                    Yang telah dilangsungkan dihadapan pemuka agama {{ $aktaPerkawinan->perkawinanPerkawinan->agama }}
+                    yang
                     bernama {{ $aktaPerkawinan->perkawinanPerkawinan->nama_pemuka_agama }} pada tanggal
                     {{ tglIndo($aktaPerkawinan->perkawinanPerkawinan->tanggal_pemberkatan_perkawinan) }} di
                     {{ $aktaPerkawinan->perkawinanPerkawinan->nama_badan_peradilan }}

@@ -116,6 +116,20 @@
                     </div>
                 </div>
             @else
+                @if ($hasAktaPerkawinan && $hasAktaPerkawinan->status == 'rejected')
+                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6 pb-12">
+                        <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                            <p>Pengajuan akta perkawinan Anda sebelumnya berstatus
+                                <span>
+                                    <b class="text-red-600 uppercase">
+                                        {{ $hasAktaPerkawinan->status }}
+                                    </b>
+                                </span>
+                                , Anda dapat mengajukan akta perkawinan baru dengan mengisi form dibawah ini.
+                            </p>
+                        </div>
+                    </div>
+                @endif
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
                     <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                         <form method="post" action="{{ route('akta-perkawinan.store') }}" class="space-y-6"

@@ -2,12 +2,12 @@
     <div class="flex">
         <span class="w-64 font-semibold text-gray-700">Tanggal Pemberkatan Perkawinan</span>
         <span class="text-gray-900">:
-            {{ tglIndo($hasAktaPerkawinan->perkawinanPerkawinan->tanggal_pemberkatan_perkawinan ?? '-') }}</span>
+            {{ $hasAktaPerkawinan->perkawinanPerkawinan->tanggal_pemberkatan_perkawinan ? tglIndo($hasAktaPerkawinan->perkawinanPerkawinan->tanggal_pemberkatan_perkawinan) : '-' }}
     </div>
     <div class="flex">
         <span class="w-64 font-semibold text-gray-700">Tanggal Melapor</span>
         <span class="text-gray-900">:
-            {{ tglIndo($hasAktaPerkawinan->perkawinanPerkawinan->tanggal_melapor ?? '-') }}</span>
+            {{ $hasAktaPerkawinan->perkawinanPerkawinan->tanggal_melapor ? tglIndo($hasAktaPerkawinan->perkawinanPerkawinan->tanggal_melapor) : '-' }}
     </div>
     <div class="flex">
         <span class="w-64 font-semibold text-gray-700">Pukul</span>
@@ -27,7 +27,8 @@
     <div class="flex">
         <span class="w-64 font-semibold text-gray-700">Tanggal Putusan Penepatan Peradilan</span>
         <span class="text-gray-900">:
-            {{ tglIndo($hasAktaPerkawinan->perkawinanPerkawinan->tanggal_putusan ?? '-') }}</span>
+            {{ $hasAktaPerkawinan->perkawinanPerkawinan->tanggal_putusan ? tglIndo($hasAktaPerkawinan->perkawinanPerkawinan->tanggal_putusan) : '-' }}
+        </span>
     </div>
     <div class="flex">
         <span class="w-64 font-semibold text-gray-700">Nama Pemuka Agama</span>

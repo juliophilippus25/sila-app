@@ -15,7 +15,6 @@ class DataAyahIstriRequest extends FormRequest
     {
         return [
             'dadi_nik' => 'required|digits:16',
-            'dadi_nomor_kk' => 'required|digits:16',
             'dadi_nama_lengkap' => 'required|string|min:3',
             'dadi_tanggal_lahir' => 'required|date|before:today',
             'dadi_tempat_lahir' => 'required|string|min:3',
@@ -28,7 +27,6 @@ class DataAyahIstriRequest extends FormRequest
             'dadi_kecamatan' => 'required|string|min:3',
             'dadi_kabupaten' => 'required|string|min:3',
             'dadi_provinsi' => 'required|string|min:3',
-            'dadi_pendidikan_terakhir' => 'required|string',
             'dadi_agama' => 'required|string',
             'dadi_organisasi_penghayat' => 'nullable|string|min:3',
             'dadi_pekerjaan' => 'required|string',
@@ -53,7 +51,6 @@ class DataAyahIstriRequest extends FormRequest
             'dadi_alamat.required' => 'Alamat wajib diisi.',
             'dadi_kode_pos.required' => 'Kode pos wajib diisi.',
             'dadi_telepon.required' => 'Nomor telepon wajib diisi.',
-            'dadi_pendidikan_terakhir.required' => 'Pendidikan terakhir wajib diisi.',
             'dadi_agama.required' => 'Agama wajib diisi.',
             'dadi_pekerjaan.required' => 'Pekerjaan wajib diisi.',
 

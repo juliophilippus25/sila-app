@@ -16,7 +16,6 @@ class DataIbuSuamiRequest extends FormRequest
     {
         return [
             'dids_nik' => 'required|digits:16',
-            'dids_nomor_kk' => 'required|digits:16',
             'dids_nama_lengkap' => 'required|string|min:3',
             'dids_tanggal_lahir' => 'required|date|before:today',
             'dids_tempat_lahir' => 'required|string|min:3',
@@ -29,7 +28,6 @@ class DataIbuSuamiRequest extends FormRequest
             'dids_kecamatan' => 'required|string|min:3',
             'dids_kabupaten' => 'required|string|min:3',
             'dids_provinsi' => 'required|string|min:3',
-            'dids_pendidikan_terakhir' => 'required|string',
             'dids_agama' => 'required|string',
             'dids_organisasi_penghayat' => 'nullable|string|min:3',
             'dids_pekerjaan' => 'required|string',
@@ -54,7 +52,6 @@ class DataIbuSuamiRequest extends FormRequest
             'dids_alamat.required' => 'Alamat wajib diisi.',
             'dids_kode_pos.required' => 'Kode pos wajib diisi.',
             'dids_telepon.required' => 'Nomor telepon wajib diisi.',
-            'dids_pendidikan_terakhir.required' => 'Pendidikan terakhir wajib diisi.',
             'dids_agama.required' => 'Agama wajib diisi.',
             'dids_pekerjaan.required' => 'Pekerjaan wajib diisi.',
 

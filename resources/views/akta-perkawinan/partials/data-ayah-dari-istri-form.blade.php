@@ -12,7 +12,7 @@
     <div class="mt-6 space-y-6">
         <div>
             <x-input-label for="dadi_nik" :value="__('Nomor Induk Kependudukan (NIK)') . ' <span class=\'text-red-600\'>*</span>'" />
-            <x-text-input id="dadi_nik" name="dadi_nik" type="number" class="mt-1 block w-full" :value="old('dadi_nik')" />
+            <x-text-input id="dadi_nik" name="dadi_nik" type="text" class="mt-1 block w-full" :value="old('dadi_nik')" />
             <x-input-error class="mt-2" :messages="$errors->get('dadi_nik')" />
         </div>
 

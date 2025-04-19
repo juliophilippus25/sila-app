@@ -12,7 +12,7 @@
     <div class="mt-6 space-y-6">
         <div>
             <x-input-label for="dads_nik" :value="__('Nomor Induk Kependudukan (NIK)') . ' <span class=\'text-red-600\'>*</span>'" />
-            <x-text-input id="dads_nik" name="dads_nik" type="number" class="mt-1 block w-full" :value="old('dads_nik')" />
+            <x-text-input id="dads_nik" name="dads_nik" type="text" class="mt-1 block w-full" :value="old('dads_nik')" />
             <x-input-error class="mt-2" :messages="$errors->get('dads_nik')" />
         </div>
 
@@ -70,7 +70,7 @@
 
             <div>
                 <x-input-label for="dads_telepon" :value="__('Telepon') . ' <span class=\'text-red-600\'>*</span>'" />
-                <x-text-input id="dads_telepon" name="dads_telepon" type="number" class="mt-1 block w-full"
+                <x-text-input id="dads_telepon" name="dads_telepon" type="text" class="mt-1 block w-full"
                     :value="old('dads_telepon')" />
                 <x-input-error class="mt-2" :messages="$errors->get('dads_telepon')" />
             </div>

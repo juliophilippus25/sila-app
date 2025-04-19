@@ -15,7 +15,6 @@ class DataAyahSuamiRequest extends FormRequest
     {
         return [
             'dads_nik' => 'required|digits:16',
-            'dads_nomor_kk' => 'required|digits:16',
             'dads_nama_lengkap' => 'required|string|min:3',
             'dads_tanggal_lahir' => 'required|date|before:today',
             'dads_tempat_lahir' => 'required|string|min:3',
@@ -28,7 +27,6 @@ class DataAyahSuamiRequest extends FormRequest
             'dads_kecamatan' => 'required|string|min:3',
             'dads_kabupaten' => 'required|string|min:3',
             'dads_provinsi' => 'required|string|min:3',
-            'dads_pendidikan_terakhir' => 'required|string',
             'dads_agama' => 'required|string',
             'dads_organisasi_penghayat' => 'nullable|string|min:3',
             'dads_pekerjaan' => 'required|string',
@@ -53,7 +51,6 @@ class DataAyahSuamiRequest extends FormRequest
             'dads_alamat.required' => 'Alamat wajib diisi.',
             'dads_kode_pos.required' => 'Kode pos wajib diisi.',
             'dads_telepon.required' => 'Nomor telepon wajib diisi.',
-            'dads_pendidikan_terakhir.required' => 'Pendidikan terakhir wajib diisi.',
             'dads_agama.required' => 'Agama wajib diisi.',
             'dads_pekerjaan.required' => 'Pekerjaan wajib diisi.',
 

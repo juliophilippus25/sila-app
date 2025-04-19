@@ -101,14 +101,30 @@ class AktaPerkawinanController extends Controller
         );
 
         $validator = Validator::make($request->all(), $rules, $messages);
-
+        // dd($validator);
         if ($validator->fails()) {
             toast('Periksa kembali data anda.', 'error')->hideCloseButton()->autoClose(3000);
             return redirect()->back()->withErrors($validator)->withInput();
         }
-
-        // Simpan data
         $userLogin = Auth::user()->id;
+
+        $pengajuanTertolak = AktaPerkawinan::where('user_id', $userLogin)
+            ->where('status', 'rejected')
+            ->first();
+
+        if ($pengajuanTertolak) {
+            $pengajuanTertolak->perkawinanSuami()->delete();
+            $pengajuanTertolak->perkawinanAyahSuami()->delete();
+            $pengajuanTertolak->perkawinanIbuSuami()->delete();
+            $pengajuanTertolak->perkawinanIstri()->delete();
+            $pengajuanTertolak->perkawinanAyahIstri()->delete();
+            $pengajuanTertolak->perkawinanIbuIstri()->delete();
+            $pengajuanTertolak->perkawinanSaksi()->delete();
+            $pengajuanTertolak->perkawinanPerkawinan()->delete();
+            $pengajuanTertolak->perkawinanAdministrasi?->deleteWithFiles();
+
+            $pengajuanTertolak->delete();
+        }
 
         $aktaPerkawinan = new AktaPerkawinan();
         $aktaPerkawinan->user_id = $userLogin;
@@ -292,46 +308,31 @@ class AktaPerkawinanController extends Controller
 
     private function storeSaksi($dataSaksiRequest, $aktaPerkawinanId) {
         $saksi = new PerkawinanSaksi();
-
         $saksi->akta_perkawinan_id = $aktaPerkawinanId;
 
-        $saksi_1 = [
-            'nik' => $dataSaksiRequest->ds_1['nik'],
-            'nama_lengkap' => $dataSaksiRequest->ds_1['nama_lengkap'],
-            'tempat_lahir' => $dataSaksiRequest->ds_1['tempat_lahir'],
-            'tanggal_lahir' => $dataSaksiRequest->ds_1['tanggal_lahir'],
-            'alamat' => $dataSaksiRequest->ds_1['alamat'],
-            'rt' => $dataSaksiRequest->ds_1['rt'],
-            'rw' => $dataSaksiRequest->ds_1['rw'],
-            'kode_pos' => $dataSaksiRequest->ds_1['kode_pos'],
-            'telepon' => $dataSaksiRequest->ds_1['telepon'],
-            'kelurahan' => $dataSaksiRequest->ds_1['kelurahan'],
-            'kecamatan' => $dataSaksiRequest->ds_1['kecamatan'],
-            'kabupaten' => $dataSaksiRequest->ds_1['kabupaten'],
-            'provinsi' => $dataSaksiRequest->ds_1['provinsi'],
-            'pekerjaan' => $dataSaksiRequest->ds_1['pekerjaan'],
-            'agama' => $dataSaksiRequest->ds_1['agama'],
-            'organisasi_penghayat' => $dataSaksiRequest->ds_1['organisasi_penghayat'],
-        ];
+        $getSaksiData = function($prefix) use ($dataSaksiRequest) {
+            return [
+                'nik' => $dataSaksiRequest->{$prefix}['nik'],
+                'nama_lengkap' => $dataSaksiRequest->{$prefix}['nama_lengkap'],
+                'tempat_lahir' => $dataSaksiRequest->{$prefix}['tempat_lahir'],
+                'tanggal_lahir' => $dataSaksiRequest->{$prefix}['tanggal_lahir'],
+                'alamat' => $dataSaksiRequest->{$prefix}['alamat'],
+                'rt' => $dataSaksiRequest->{$prefix}['rt'],
+                'rw' => $dataSaksiRequest->{$prefix}['rw'],
+                'kode_pos' => $dataSaksiRequest->{$prefix}['kode_pos'],
+                'telepon' => $dataSaksiRequest->{$prefix}['telepon'],
+                'kelurahan' => $dataSaksiRequest->{$prefix}['kelurahan'],
+                'kecamatan' => $dataSaksiRequest->{$prefix}['kecamatan'],
+                'kabupaten' => $dataSaksiRequest->{$prefix}['kabupaten'],
+                'provinsi' => $dataSaksiRequest->{$prefix}['provinsi'],
+                'pekerjaan' => $dataSaksiRequest->{$prefix}['pekerjaan'],
+                'agama' => $dataSaksiRequest->{$prefix}['agama'],
+                'organisasi_penghayat' => $dataSaksiRequest->{$prefix}['organisasi_penghayat'] ?? null,
+            ];
+        };
 
-        $saksi_2 = [
-            'nik' => $dataSaksiRequest->ds_2['nik'],
-            'nama_lengkap' => $dataSaksiRequest->ds_2['nama_lengkap'],
-            'tempat_lahir' => $dataSaksiRequest->ds_2['tempat_lahir'],
-            'tanggal_lahir' => $dataSaksiRequest->ds_2['tanggal_lahir'],
-            'alamat' => $dataSaksiRequest->ds_2['alamat'],
-            'rt' => $dataSaksiRequest->ds_2['rt'],
-            'rw' => $dataSaksiRequest->ds_2['rw'],
-            'kode_pos' => $dataSaksiRequest->ds_2['kode_pos'],
-            'telepon' => $dataSaksiRequest->ds_2['telepon'],
-            'kelurahan' => $dataSaksiRequest->ds_2['kelurahan'],
-            'kecamatan' => $dataSaksiRequest->ds_2['kecamatan'],
-            'kabupaten' => $dataSaksiRequest->ds_2['kabupaten'],
-            'provinsi' => $dataSaksiRequest->ds_2['provinsi'],
-            'pekerjaan' => $dataSaksiRequest->ds_2['pekerjaan'],
-            'agama' => $dataSaksiRequest->ds_2['agama'],
-            'organisasi_penghayat' => $dataSaksiRequest->ds_2['organisasi_penghayat'],
-        ];
+        $saksi_1 = $getSaksiData('ds_1');
+        $saksi_2 = $getSaksiData('ds_2');
 
         $saksi->saksi_1 = json_encode($saksi_1);
         $saksi->saksi_2 = json_encode($saksi_2);

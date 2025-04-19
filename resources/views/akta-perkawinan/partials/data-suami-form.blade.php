@@ -12,7 +12,7 @@
     <div class="mt-6 space-y-6">
         <div>
             <x-input-label for="ds_nik" :value="__('Nomor Induk Kependudukan (NIK)') . ' <span class=\'text-red-600\'>*</span>'" />
-            <x-text-input id="ds_nik" name="ds_nik" type="number" class="mt-1 block w-full" :value="old('ds_nik')" />
+            <x-text-input id="ds_nik" name="ds_nik" type="text" class="mt-1 block w-full" :value="old('ds_nik')" />
             <x-input-error class="mt-2" :messages="$errors->get('ds_nik')" />
         </div>
 
@@ -76,14 +76,14 @@
 
             <div>
                 <x-input-label for="ds_kode_pos" :value="__('Kode Pos') . ' <span class=\'text-red-600\'>*</span>'" />
-                <x-text-input id="ds_kode_pos" name="ds_kode_pos" type="number" class="mt-1 block w-full"
+                <x-text-input id="ds_kode_pos" name="ds_kode_pos" type="text" class="mt-1 block w-full"
                     :value="old('ds_kode_pos')" />
                 <x-input-error class="mt-2" :messages="$errors->get('ds_kode_pos')" />
             </div>
 
             <div>
                 <x-input-label for="ds_telepon" :value="__('Telepon') . ' <span class=\'text-red-600\'>*</span>'" />
-                <x-text-input id="ds_telepon" name="ds_telepon" type="number" class="mt-1 block w-full"
+                <x-text-input id="ds_telepon" name="ds_telepon" type="text" class="mt-1 block w-full"
                     :value="old('ds_telepon')" />
                 <x-input-error class="mt-2" :messages="$errors->get('ds_telepon')" />
             </div>
@@ -149,8 +149,8 @@
 
             <div>
                 <x-input-label for="ds_anak_ke" :value="__('Anak Ke') . ' <span class=\'text-red-600\'>*</span>'" />
-                <x-text-input id="ds_anak_ke" name="ds_anak_ke" type="text" class="mt-1 block w-full"
-                    :value="old('ds_anak_ke')" />
+                <x-text-input id="ds_anak_ke" name="ds_anak_ke" type="number" min="1" step="1"
+                    class="mt-1 block w-full" :value="old('ds_anak_ke')" />
                 <x-input-error class="mt-2" :messages="$errors->get('ds_anak_ke')" />
             </div>
         </div>
@@ -164,8 +164,8 @@
 
             <div>
                 <x-input-label for="ds_perkawinan_ke" :value="__('Perkawinan Yang Ke') . ' <span class=\'text-red-600\'>*</span>'" />
-                <x-text-input id="ds_perkawinan_ke" name="ds_perkawinan_ke" type="number" class="mt-1 block w-full"
-                    :value="old('ds_perkawinan_ke')" />
+                <x-text-input id="ds_perkawinan_ke" name="ds_perkawinan_ke" type="number" min="1"
+                    step="1" class="mt-1 block w-full" :value="old('ds_perkawinan_ke')" />
                 <x-input-error class="mt-2" :messages="$errors->get('ds_perkawinan_ke')" />
             </div>
 

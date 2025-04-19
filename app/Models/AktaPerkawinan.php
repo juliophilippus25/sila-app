@@ -52,7 +52,7 @@ class AktaPerkawinan extends Model
 
     public function perkawinanIbuSuami()
     {
-        return $this->hasOne(perkawinanIbuSuami::class, 'akta_perkawinan_id');
+        return $this->hasOne(PerkawinanIbuSuami::class, 'akta_perkawinan_id');
     }
 
     public function perkawinanIstri()
@@ -62,26 +62,26 @@ class AktaPerkawinan extends Model
 
     public function perkawinanAyahIstri()
     {
-        return $this->hasOne(perkawinanAyahIstri::class, 'akta_perkawinan_id');
+        return $this->hasOne(PerkawinanAyahIstri::class, 'akta_perkawinan_id');
     }
 
     public function perkawinanIbuIstri()
     {
-        return $this->hasOne(perkawinanIbuIstri::class, 'akta_perkawinan_id');
+        return $this->hasOne(PerkawinanIbuIstri::class, 'akta_perkawinan_id');
     }
 
     public function perkawinanSaksi()
     {
-        return $this->hasOne(perkawinanSaksi::class, 'akta_perkawinan_id');
+        return $this->hasOne(PerkawinanSaksi::class, 'akta_perkawinan_id');
     }
 
     public function perkawinanPerkawinan()
     {
-        return $this->hasOne(perkawinanPerkawinan::class, 'akta_perkawinan_id');
+        return $this->hasOne(PerkawinanPerkawinan::class, 'akta_perkawinan_id');
     }
 
     public function perkawinanAdministrasi()
     {
-        return $this->hasOne(perkawinanAdministrasi::class, 'akta_perkawinan_id');
+        return $this->hasOne(PerkawinanAdministrasi::class, 'akta_perkawinan_id');
     }
 }
