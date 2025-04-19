@@ -101,11 +101,12 @@ class AktaPerkawinanController extends Controller
         );
 
         $validator = Validator::make($request->all(), $rules, $messages);
-        // dd($validator);
+
         if ($validator->fails()) {
             toast('Periksa kembali data anda.', 'error')->hideCloseButton()->autoClose(3000);
             return redirect()->back()->withErrors($validator)->withInput();
         }
+
         $userLogin = Auth::user()->id;
 
         $pengajuanTertolak = AktaPerkawinan::where('user_id', $userLogin)

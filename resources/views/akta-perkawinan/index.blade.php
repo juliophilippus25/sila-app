@@ -198,6 +198,7 @@
                                 <th>Nama Suami</th>
                                 <th>Nama Istri</th>
                                 <th>Diverifikasi Oleh</th>
+                                <th>Diajukan Oleh</th>
                                 <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
@@ -209,6 +210,7 @@
                                     <td>{{ $aktaPerkawinan->perkawinanSuami->nama_lengkap }}</td>
                                     <td>{{ $aktaPerkawinan->perkawinanIstri->nama_lengkap }}</td>
                                     <td>{{ $aktaPerkawinan->petugas->name ?? '-' }}</td>
+                                    <td>{{ $aktaPerkawinan->user->name ?? '-' }}</td>
                                     <td>
                                         @if ($aktaPerkawinan->status == 'pending')
                                             <span
