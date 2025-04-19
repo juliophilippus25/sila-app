@@ -148,7 +148,7 @@
             </div>
 
             <div>
-                <x-input-label for="di_anak_ke" :value="__('Anak Ke')" />
+                <x-input-label for="di_anak_ke" :value="__('Anak Ke') . ' <span class=\'text-red-600\'>*</span>'" />
                 <x-text-input id="di_anak_ke" name="di_anak_ke" type="number" min="1" step="1"
                     class="mt-1 block w-full" :value="old('di_anak_ke')" />
                 <x-input-error class="mt-2" :messages="$errors->get('di_anak_ke')" />

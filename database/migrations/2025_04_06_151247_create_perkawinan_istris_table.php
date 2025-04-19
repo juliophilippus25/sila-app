@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('perkawinan_istris', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->string('akta_perkawinan_id');
-            $table->string('nik', 16)->unique();
+            $table->string('nik', 16)->nullable();
             $table->string('nomor_kk', 16)->nullable();
             $table->string('nomor_paspor')->nullable();
             $table->string('nama_lengkap')->nullable();
