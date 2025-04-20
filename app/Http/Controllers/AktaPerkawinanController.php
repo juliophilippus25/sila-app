@@ -345,13 +345,13 @@ class AktaPerkawinanController extends Controller
         $perkawinan = new PerkawinanPerkawinan();
 
         $perkawinan->akta_perkawinan_id = $aktaPerkawinanId;
-        $perkawinan->tanggal_pemberkatan_perkawinan = $dataPerkawinanRequest->dp_tanggal_pemberkatan;
+        $perkawinan->tanggal_pemberkatan_perkawinan = $dataPerkawinanRequest->dp_tanggal_pemberkatan_perkawinan;
         $perkawinan->tanggal_melapor = $dataPerkawinanRequest->dp_tanggal_melapor;
         $perkawinan->pukul = $dataPerkawinanRequest->dp_pukul;
         $perkawinan->agama = $dataPerkawinanRequest->dp_agama;
         $perkawinan->organisasi_penghayat = $dataPerkawinanRequest->dp_organisasi_penghayat;
         $perkawinan->nama_pemuka_agama = $dataPerkawinanRequest->dp_nama_pemuka_agama;
-        $perkawinan->nama_badan_peradilan = $dataPerkawinanRequest->dp_badan_peradilan;
+        $perkawinan->nama_badan_peradilan = $dataPerkawinanRequest->dp_nama_badan_peradilan;
         $perkawinan->nomor_putusan_pengadilan = $dataPerkawinanRequest->dp_no_putusan_pengadilan;
         $perkawinan->tanggal_putusan = $dataPerkawinanRequest->dp_tanggal_putusan;
         $perkawinan->ijin_perwakilan = $dataPerkawinanRequest->dp_ijin_perwakilan;

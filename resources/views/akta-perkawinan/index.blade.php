@@ -133,7 +133,7 @@
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
                     <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                         <form method="post" action="{{ route('akta-perkawinan.store') }}" class="space-y-6"
-                            enctype="multipart/form-data">
+                            enctype="multipart/form-data" id="submit-form">
                             @csrf
 
                             <div id="stepper-form">

@@ -134,7 +134,7 @@
         </div>
 
         <div>
-            <x-input-label for="ds_organisasi_penghayat" :value="__('Nama Organisasi Penghayat Kepercayaan') . ' <span class=\'text-red-600\'>*</span>'" />
+            <x-input-label for="ds_organisasi_penghayat" :value="__('Nama Organisasi Penghayat Kepercayaan')" />
             <x-text-input id="ds_organisasi_penghayat" name="ds_organisasi_penghayat" type="text"
                 class="mt-1 block w-full" :value="old('ds_organisasi_penghayat')" />
             <x-input-error class="mt-2" :messages="$errors->get('ds_organisasi_penghayat')" />

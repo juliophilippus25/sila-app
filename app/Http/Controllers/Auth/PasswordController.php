@@ -24,6 +24,7 @@ class PasswordController extends Controller
             'password' => Hash::make($validated['password']),
         ]);
 
+        toast('Password berhasil diperbarui!','success')->hideCloseButton()->autoClose(3000);
         return back()->with('status', 'password-updated');
     }
 }
