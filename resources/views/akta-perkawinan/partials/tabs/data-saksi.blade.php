@@ -45,10 +45,6 @@
                 <span class="text-gray-900">: {{ $saksi1->telepon ?? '-' }}</span>
             </div>
             <div class="flex">
-                <span class="w-64 font-semibold text-gray-700">Pendidikan Terakhir</span>
-                <span class="text-gray-900">: {{ $saksi1->pendidikan_terakhir ?? '-' }}</span>
-            </div>
-            <div class="flex">
                 <span class="w-64 font-semibold text-gray-700">Agama</span>
                 <span class="text-gray-900">: {{ $saksi1->agama ?? '-' }}</span>
             </div>
@@ -56,22 +52,6 @@
                 <span class="w-64 font-semibold text-gray-700">Nama Organisasi Penghayat</span>
                 <span class="text-gray-900">:
                     {{ $saksi1->organisasi_penghayat ?? '-' }}</span>
-            </div>
-            <div class="flex">
-                <span class="w-64 font-semibold text-gray-700">Anak Ke</span>
-                <span class="text-gray-900">: {{ $saksi1->anak_ke ?? '-' }}</span>
-            </div>
-            <div class="flex">
-                <span class="w-64 font-semibold text-gray-700">Status Perkawinan</span>
-                <span class="text-gray-900">: {{ $saksi1->status_perkawinan ?? '-' }}</span>
-            </div>
-            <div class="flex">
-                <span class="w-64 font-semibold text-gray-700">Kewarganegaraan</span>
-                <span class="text-gray-900">: {{ $saksi1->kewarganegaraan ?? '-' }}</span>
-            </div>
-            <div class="flex">
-                <span class="w-64 font-semibold text-gray-700">Kebangsaan</span>
-                <span class="text-gray-900">: {{ $saksi1->kebangsaan ?? '-' }}</span>
             </div>
         </div>
 
@@ -120,10 +100,6 @@
                 <span class="text-gray-900">: {{ $saksi2->telepon ?? '-' }}</span>
             </div>
             <div class="flex">
-                <span class="w-64 font-semibold text-gray-700">Pendidikan Terakhir</span>
-                <span class="text-gray-900">: {{ $saksi2->pendidikan_terakhir ?? '-' }}</span>
-            </div>
-            <div class="flex">
                 <span class="w-64 font-semibold text-gray-700">Agama</span>
                 <span class="text-gray-900">: {{ $saksi2->agama ?? '-' }}</span>
             </div>
@@ -131,22 +107,6 @@
                 <span class="w-64 font-semibold text-gray-700">Nama Organisasi Penghayat</span>
                 <span class="text-gray-900">:
                     {{ $saksi2->organisasi_penghayat ?? '-' }}</span>
-            </div>
-            <div class="flex">
-                <span class="w-64 font-semibold text-gray-700">Anak Ke</span>
-                <span class="text-gray-900">: {{ $saksi2->anak_ke ?? '-' }}</span>
-            </div>
-            <div class="flex">
-                <span class="w-64 font-semibold text-gray-700">Status Perkawinan</span>
-                <span class="text-gray-900">: {{ $saksi2->status_perkawinan ?? '-' }}</span>
-            </div>
-            <div class="flex">
-                <span class="w-64 font-semibold text-gray-700">Kewarganegaraan</span>
-                <span class="text-gray-900">: {{ $saksi2->kewarganegaraan ?? '-' }}</span>
-            </div>
-            <div class="flex">
-                <span class="w-64 font-semibold text-gray-700">Kebangsaan</span>
-                <span class="text-gray-900">: {{ $saksi2->kebangsaan ?? '-' }}</span>
             </div>
         </div>
 

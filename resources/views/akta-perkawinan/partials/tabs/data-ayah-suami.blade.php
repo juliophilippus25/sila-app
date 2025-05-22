@@ -30,10 +30,6 @@
         <span class="text-gray-900">: {{ $hasAktaPerkawinan->perkawinanAyahSuami->telepon ?? '-' }}</span>
     </div>
     <div class="flex">
-        <span class="w-64 font-semibold text-gray-700">Pendidikan Terakhir</span>
-        <span class="text-gray-900">: {{ $hasAktaPerkawinan->perkawinanAyahSuami->pendidikan_terakhir ?? '-' }}</span>
-    </div>
-    <div class="flex">
         <span class="w-64 font-semibold text-gray-700">Agama</span>
         <span class="text-gray-900">: {{ $hasAktaPerkawinan->perkawinanAyahSuami->agama ?? '-' }}</span>
     </div>
