@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Petugas\CreatePetugasRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Validator;
 
 class PetugasController extends Controller
 {
@@ -16,14 +16,8 @@ class PetugasController extends Controller
         return view('petugas.index', compact('petugas', 'dataType'));
     }
 
-    public function store(Request $request) {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'nip' => ['required', 'string', 'size:16', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
-
+    public function store(CreatePetugasRequest $request)
+    {
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
@@ -32,7 +26,8 @@ class PetugasController extends Controller
         $user->role = 'petugas';
         $user->save();
 
+        toast('Petugas berhasil ditambahkan.', 'success')->hideCloseButton()->autoClose(3000);
         return redirect()->route('petugas.index');
-    }
+}
 
 }
