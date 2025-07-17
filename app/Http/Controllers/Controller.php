@@ -63,6 +63,42 @@ abstract class Controller
         ];
     }
 
+    public function getTempatLahir() {
+        return [
+            'RS/RB' => 'RS/RB',
+            'Puskemas' => 'Puskesmas',
+            'Polindes' => 'Polindes',
+            'Rumah' => 'Rumah',
+            'Lainnya' => 'Lainnya'
+        ];
+    }
+
+    public function getJenisKelahiran() {
+        return [
+            'Tunggal' => 'Tunggal',
+            'Kembar 2' => 'Kembar 2',
+            'Kembar 3' => 'Kembar 3',
+            'Kembar 4' => 'Kembar 4',
+            'Lainnya' => 'Lainnya'
+        ];
+    }
+
+    public function getPenolongKelahiran() {
+        return [
+            'Dokter' => 'Dokter',
+            'Bidan/Perawat' => 'Bidan/Perawat',
+            'Dukun' => 'Dukun',
+            'Lainnya' => 'Lainnya'
+        ];
+    }
+
+    public function getJenisKelamin() {
+        return [
+            'Laki-laki' => 'Laki-laki',
+            'Perempuan' => 'Perempuan'
+        ];
+    }
+
     public function generateId() {
         return (string) Str::uuid();
     }
