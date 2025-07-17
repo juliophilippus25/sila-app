@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('id')->primary();
             $table->string('akta_lahir_id');
             $table->string('nama_lengkap')->nullable();
+            $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan'])->nullable();
             $table->enum('tempat_dilahirkan', ['RS/RB', 'Puskesmas', 'Polindes', 'Rumah','Lainnya'])->nullable();
             $table->string('tempat_kelahiran')->nullable();
             $table->date('tanggal_lahir')->nullable();

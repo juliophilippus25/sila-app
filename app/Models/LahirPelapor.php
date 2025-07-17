@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class LahirIbu extends Model
+class LahirPelapor extends Model
 {
-     protected $keyType = 'string';
+    protected $keyType = 'string';
     protected $primaryKey = 'id';
     public $incrementing = false;
 

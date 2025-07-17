@@ -3,8 +3,37 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class LahirSaksi extends Model
 {
-    //
+     protected $keyType = 'string';
+    protected $primaryKey = 'id';
+    public $incrementing = false;
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->id = (string) Str::uuid();
+        });
+    }
+
+    protected $fillable = [
+        'id',
+        'akta_lahir_id',
+        'saksi_1',
+        'saksi_2'
+    ];
+
+    protected $casts = [
+        'saksi_1' => 'array',
+        'saksi_2' => 'array'
+    ];
+
+    public function aktaLahir()
+    {
+        return $this->belongsTo(AktaLahir::class, 'akta_lahir_id');
+    }
 }
