@@ -12,9 +12,10 @@
     <div class="mt-6 space-y-6">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div>
-                <x-input-label for="dba_nama" :value="__('Nama Lengkap') . ' <span class=\'text-red-600\'>*</span>'" />
-                <x-text-input id="dba_nama" name="dba_nama" type="text" class="mt-1 block w-full" :value="old('dba_nama')" />
-                <x-input-error class="mt-2" :messages="$errors->get('dba_nama')" />
+                <x-input-label for="dba_nama_lengkap" :value="__('Nama Lengkap') . ' <span class=\'text-red-600\'>*</span>'" />
+                <x-text-input id="dba_nama_lengkap" name="dba_nama_lengkap" type="text" class="mt-1 block w-full"
+                    :value="old('dba_nama_lengkap')" />
+                <x-input-error class="mt-2" :messages="$errors->get('dba_nama_lengkap')" />
             </div>
 
             <div>
