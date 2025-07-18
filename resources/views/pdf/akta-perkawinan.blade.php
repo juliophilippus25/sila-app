@@ -93,7 +93,7 @@
             </div>
 
             <div class="mt-8 text-right">
-                <p class="text-sm">Kutipan ini dikeluarkan di Bekayang </p>
+                <p class="text-sm">Kutipan ini dikeluarkan di Bengkayang </p>
                 <p>pada tanggal {{ tglIndo($aktaPerkawinan->tanggal_akta) }}</p>
             </div>
 
