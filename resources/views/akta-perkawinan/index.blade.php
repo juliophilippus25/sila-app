@@ -127,6 +127,14 @@
                                 </span>
                                 , Anda dapat mengajukan akta perkawinan baru dengan mengisi form dibawah ini.
                             </p>
+                            <p>
+                                Alasan pengajuan akta perkawinan Anda ditolak:
+                                <span>
+                                    <b class="text-red-600 uppercase">
+                                        {{ $hasAktaPerkawinan->alasan }}
+                                    </b>
+                                </span>
+                            </p>
                         </div>
                     </div>
                 @endif
@@ -138,39 +146,39 @@
 
                             <div id="stepper-form">
                                 <div id="step-1" class="step-content">
-                                    @include('akta-perkawinan.partials.data-suami-form')
+                                    @include('akta-perkawinan.partials.forms.data-suami-form')
                                 </div>
 
                                 <div id="step-2" class="step-content hidden">
-                                    @include('akta-perkawinan.partials.data-ayah-dari-suami-form')
+                                    @include('akta-perkawinan.partials.forms.data-ayah-dari-suami-form')
                                 </div>
 
                                 <div id="step-3" class="step-content hidden">
-                                    @include('akta-perkawinan.partials.data-ibu-dari-suami-form')
+                                    @include('akta-perkawinan.partials.forms.data-ibu-dari-suami-form')
                                 </div>
 
                                 <div id="step-4" class="step-content">
-                                    @include('akta-perkawinan.partials.data-istri-form')
+                                    @include('akta-perkawinan.partials.forms.data-istri-form')
                                 </div>
 
                                 <div id="step-5" class="step-content hidden">
-                                    @include('akta-perkawinan.partials.data-ayah-dari-istri-form')
+                                    @include('akta-perkawinan.partials.forms.data-ayah-dari-istri-form')
                                 </div>
 
                                 <div id="step-6" class="step-content hidden">
-                                    @include('akta-perkawinan.partials.data-ibu-dari-istri-form')
+                                    @include('akta-perkawinan.partials.forms.data-ibu-dari-istri-form')
                                 </div>
 
                                 <div id="step-7" class="step-content hidden">
-                                    @include('akta-perkawinan.partials.data-saksi-form')
+                                    @include('akta-perkawinan.partials.forms.data-saksi-form')
                                 </div>
 
                                 <div id="step-8" class="step-content hidden">
-                                    @include('akta-perkawinan.partials.data-perkawinan-form')
+                                    @include('akta-perkawinan.partials.forms.data-perkawinan-form')
                                 </div>
 
                                 <div id="step-9" class="step-content hidden">
-                                    @include('akta-perkawinan.partials.data-administrasi-form')
+                                    @include('akta-perkawinan.partials.forms.data-administrasi-form')
                                 </div>
                             </div>
 

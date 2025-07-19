@@ -92,13 +92,21 @@
                 @if ($hasAktaLahir && $hasAktaLahir->status == 'rejected')
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6 pb-12">
                         <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                            <p>Pengajuan akta Lahir Anda sebelumnya berstatus
+                            <p>Pengajuan akta lahir Anda sebelumnya berstatus
                                 <span>
                                     <b class="text-red-600 uppercase">
                                         {{ $hasAktaLahir->status }}
                                     </b>
                                 </span>
-                                , Anda dapat mengajukan akta Lahir baru dengan mengisi form dibawah ini.
+                                , Anda dapat mengajukan akta lahir baru dengan mengisi form dibawah ini.
+                            </p>
+                            <p>
+                                Alasan pengajuan akta lahir Anda ditolak:
+                                <span>
+                                    <b class="text-red-600 uppercase">
+                                        {{ $hasAktaLahir->alasan }}
+                                    </b>
+                                </span>
                             </p>
                         </div>
                     </div>

@@ -63,14 +63,14 @@
             <div>
                 <x-input-label for="da_kabupaten" :value="__('Kabupaten/Kota') . ' <span class=\'text-red-600\'>*</span>'" />
                 <x-text-input id="da_kabupaten" name="da_kabupaten" type="text" class="mt-1 block w-full"
-                    :value="'Bengkayang'" readonly />
+                    :value="old('da_kabupaten')" />
                 <x-input-error class="mt-2" :messages="$errors->get('da_kabupaten')" />
             </div>
 
             <div>
                 <x-input-label for="da_provinsi" :value="__('Provinsi') . ' <span class=\'text-red-600\'>*</span>'" />
                 <x-text-input id="da_provinsi" name="da_provinsi" type="text" class="mt-1 block w-full"
-                    :value="'Kalimantan Barat'" readonly />
+                    :value="old('da_provinsi')" />
                 <x-input-error class="mt-2" :messages="$errors->get('da_provinsi')" />
             </div>
         </div>

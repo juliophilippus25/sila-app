@@ -435,11 +435,17 @@ class AktaPerkawinanController extends Controller
         return redirect()->back();
     }
 
-    public function rejectAktaPerkawinan($aktaPerkawinanId) {
-        $userLogin = Auth::user()->aktaPerkawinanId;
+    public function rejectAktaPerkawinan(Request $request, $aktaPerkawinanId)
+    {
+        $request->validate([
+            'alasan' => 'required|string|max:1000'
+        ]);
 
-        $aktaPerkawinan = AktaPerkawinan::find($aktaPerkawinanId);
+        $userLogin = Auth::user()->id;
+
+        $aktaPerkawinan = AktaPerkawinan::findOrFail($aktaPerkawinanId);
         $aktaPerkawinan->status = 'rejected';
+        $aktaPerkawinan->alasan = $request->alasan;
         $aktaPerkawinan->petugas_id = $userLogin;
         $aktaPerkawinan->save();
 

@@ -38,4 +38,10 @@
             @endif
         </span>
     </div>
+    @if($aktaLahir->status == 'rejected')
+        <div class="flex">
+            <span class="w-64 font-semibold text-gray-700">Alasan Penolakan</span>
+            <span class="text-gray-900 capitalize">: {{ $aktaLahir->alasan ?? '-' }}</span>
+        </div>
+    @endif
 </div>

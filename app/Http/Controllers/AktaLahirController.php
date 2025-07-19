@@ -290,11 +290,17 @@ class AktaLahirController extends Controller
         return redirect()->back();
     }
 
-    public function rejectAktaLahir($aktaLahirId) {
+    public function rejectAktaLahir(Request $request, $aktaLahirId)
+    {
+        $request->validate([
+            'alasan' => 'required|string|max:1000'
+        ]);
+
         $userLogin = Auth::user()->id;
 
-        $aktaLahir = AktaLahir::find($aktaLahirId);
+        $aktaLahir = AktaLahir::findOrFail($aktaLahirId);
         $aktaLahir->status = 'rejected';
+        $aktaLahir->alasan = $request->alasan;
         $aktaLahir->petugas_id = $userLogin;
         $aktaLahir->save();
 

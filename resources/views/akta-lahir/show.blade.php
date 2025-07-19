@@ -13,6 +13,8 @@
                 <div class="flex justify-end mb-4">
                     @include('akta-lahir.partials.forms.verification-modal')
                 </div>
+
+                @include('akta-lahir.partials.forms.rejected-modal')
             @endif
 
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">

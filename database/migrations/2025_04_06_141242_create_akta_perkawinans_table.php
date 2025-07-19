@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('tanggal_akta')->nullable();
             $table->date('tanggal_cetak')->nullable();
             $table->enum('status', ['pending', 'approved', 'rejected'])->nullable();
+            $table->string('alasan')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

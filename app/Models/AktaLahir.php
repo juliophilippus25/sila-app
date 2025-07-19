@@ -27,7 +27,8 @@ class AktaLahir extends Model
         'nomor_akta',
         'tanggal_akta',
         'tanggal_cetak',
-        'status'
+        'status',
+        'alasan'
     ];
 
     public function user()
