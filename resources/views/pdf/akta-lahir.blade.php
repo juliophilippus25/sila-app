@@ -67,7 +67,9 @@
             </div>
 
             <div class="mb-4">
-                <p>Telah tercatat kelahiran anak:
+                <p>
+                    Telah tercatat kelahiran anak {{ strtolower($aktaLahir->lahirBayiAnak->jenis_kelamin) }}
+                    sebagai anak ke <span class="font-bold uppercase">{{ terbilang($aktaLahir->lahirBayiAnak->kelahiran_ke) }}</span>:
                     <hr class="border-dashed">
                 </p>
             </div>
