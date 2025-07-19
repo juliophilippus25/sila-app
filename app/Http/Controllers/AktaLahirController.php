@@ -253,4 +253,22 @@ class AktaLahirController extends Controller
         $administrasi->persyaratan = json_encode($persyaratanData);
         $administrasi->save();
     }
+
+    public function show($aktaLahirId)
+    {
+        $aktaLahir = AktaLahir::with([
+            'user',
+            'petugas',
+            'lahirBayiAnak',
+            'lahirAyah',
+            'lahirIbu',
+            'lahirPelapor',
+            'lahirSaksi',
+            'lahirAdministrasi'
+        ])->find($aktaLahirId);
+
+        $persyaratanData = json_decode($aktaLahir->lahirAdministrasi->persyaratan, true);
+
+        return view('akta-lahir.show', compact('aktaLahir', 'persyaratanData'));
+    }
 }

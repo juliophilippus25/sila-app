@@ -156,8 +156,9 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nama Suami</th>
-                                <th>Nama Istri</th>
+                                <th>Nama Anak</th>
+                                <th>Nama Ibu</th>
+                                <th>Nama Ayah</th>
                                 <th>Diverifikasi Oleh</th>
                                 <th>Diajukan Oleh</th>
                                 <th>Status</th>
@@ -170,6 +171,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $aktaLahir->lahirBayiAnak->nama_lengkap }}</td>
                                     <td>{{ $aktaLahir->lahirIbu->nama_lengkap }}</td>
+                                    <td>{{ $aktaLahir->lahirAyah->nama_lengkap }}</td>
                                     <td>{{ $aktaLahir->petugas->name ?? '-' }}</td>
                                     <td>{{ $aktaLahir->user->name ?? '-' }}</td>
                                     <td>
@@ -185,7 +187,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="#"
+                                        <a href="{{ route('akta-lahir.show', $aktaLahir->id) }}"
                                             class="inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 active:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
                                             Lihat
                                         </a>
