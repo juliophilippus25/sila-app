@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
-class LahirSaksi extends Model
+class LahirAdministrasi extends Model
 {
     protected $keyType = 'string';
     protected $primaryKey = 'id';
@@ -23,17 +24,30 @@ class LahirSaksi extends Model
     protected $fillable = [
         'id',
         'akta_lahir_id',
-        'saksi_1',
-        'saksi_2'
+        'persyaratan',
     ];
 
     protected $casts = [
-        'saksi_1' => 'array',
-        'saksi_2' => 'array'
+        'persyaratan' => 'array',
     ];
 
     public function aktaLahir()
     {
         return $this->belongsTo(AktaLahir::class, 'akta_lahir_id');
+    }
+
+    public function deleteWithFiles()
+    {
+        $persyaratan = json_decode($this->persyaratan, true);
+
+        if (is_array($persyaratan)) {
+            foreach ($persyaratan as $item) {
+                if (!empty($item['path']) && Storage::disk('public')->exists($item['path'])) {
+                    Storage::disk('public')->delete($item['path']);
+                }
+            }
+        }
+
+        $this->delete();
     }
 }
