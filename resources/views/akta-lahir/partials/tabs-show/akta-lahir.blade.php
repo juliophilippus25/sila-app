@@ -38,19 +38,4 @@
             @endif
         </span>
     </div>
-    @php
-        $fileName = 'akta-lahir-' . \Str::slug($aktaLahir->user->name) . '.pdf';
-    @endphp
-
-    @if ($aktaLahir->status == 'approved')
-        <div class="flex">
-            <span class="w-64 font-semibold text-gray-700">Download</span>
-            <span class="text-gray-900">:
-                <a href="#" target="_blank"
-                    class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
-                    Lihat PDF
-                </a>
-            </span>
-        </div>
-    @endif
 </div>

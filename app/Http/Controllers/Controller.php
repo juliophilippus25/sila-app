@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AktaLahir;
 use App\Models\AktaPerkawinan;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
@@ -113,6 +114,24 @@ abstract class Controller
 
         if ($lastAktaPerkawinan) {
             $lastNumber = (int)substr($lastAktaPerkawinan->id, -4);
+            $newNumber = str_pad($lastNumber + 1, 4, '0', STR_PAD_LEFT);
+        } else {
+            $newNumber = '0001';
+        }
+
+        return $prefix . $newNumber;
+    }
+
+    public function generateNoAktaLahir()
+    {
+        $prefix = 'AKTA-LAHIR-';
+
+        $lastAktaLahir = AktaLahir::where('id', 'like', '%')
+            ->orderBy('id', 'desc')
+            ->first();
+
+        if ($lastAktaLahir) {
+            $lastNumber = (int)substr($lastAktaLahir->id, -4);
             $newNumber = str_pad($lastNumber + 1, 4, '0', STR_PAD_LEFT);
         } else {
             $newNumber = '0001';

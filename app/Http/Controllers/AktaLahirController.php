@@ -18,6 +18,8 @@ use App\Models\LahirSaksi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+use Spatie\Browsershot\Browsershot;
 
 class AktaLahirController extends Controller
 {
@@ -270,5 +272,72 @@ class AktaLahirController extends Controller
         $persyaratanData = json_decode($aktaLahir->lahirAdministrasi->persyaratan, true);
 
         return view('akta-lahir.show', compact('aktaLahir', 'persyaratanData'));
+    }
+
+    public function acceptAktaLahir($aktaLahirId) {
+        $userLogin = Auth::user()->id;
+
+        $aktaLahir = AktaLahir::find($aktaLahirId);
+        $aktaLahir->status = 'approved';
+        $aktaLahir->nomor_akta = $this->generateNoAktaLahir();
+        $aktaLahir->tanggal_akta = now();
+        $aktaLahir->petugas_id = $userLogin;
+        $aktaLahir->save();
+
+        $this->generatePDF($aktaLahirId);
+
+        toast('Data Akta Lahir berhasil diverifikasi!','success')->hideCloseButton()->autoClose(3000);
+        return redirect()->back();
+    }
+
+    public function rejectAktaLahir($aktaLahirId) {
+        $userLogin = Auth::user()->id;
+
+        $aktaLahir = AktaLahir::find($aktaLahirId);
+        $aktaLahir->status = 'rejected';
+        $aktaLahir->petugas_id = $userLogin;
+        $aktaLahir->save();
+
+        toast('Data Akta Lahir berhasil ditolak!','success')->hideCloseButton()->autoClose(3000);
+        return redirect()->back();
+    }
+
+    private function generatePDF($aktaLahirId) {
+        $aktaLahir = AktaLahir::with([
+            'user',
+            'petugas',
+            'lahirBayiAnak',
+            'lahirAyah',
+            'lahirIbu',
+            'lahirPelapor',
+            'lahirSaksi',
+            'lahirAdministrasi'
+        ])->find($aktaLahirId);
+
+        $html = view('pdf.akta-lahir', compact('aktaLahir'))->render();
+        $fileName = 'akta-lahir-' . Str::slug($aktaLahir->user->name) . '.pdf';
+        $filePath = public_path('storage/akta-lahir/' . $fileName);
+
+        Browsershot::html($html)
+            ->format('A4')
+            ->margins(10, 10, 10, 10)
+            ->save($filePath);
+
+        return response()->json([
+            'url' => asset('storage/akta-lahir/' . $fileName)
+        ]);
+    }
+
+    public function viewPDF($aktaLahirId)
+    {
+        $akta = AktaLahir::findOrFail($aktaLahirId);
+
+        $akta->tanggal_cetak = now();
+        $akta->save();
+
+        $fileName = 'akta-lahir-' . Str::slug($akta->user->name) . '.pdf';
+        $filePath = asset('storage/akta-lahir/' . $fileName);
+
+        return redirect($filePath);
     }
 }

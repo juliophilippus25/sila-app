@@ -26,6 +26,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('', [App\Http\Controllers\AktaLahirController::class, 'index'])->name('akta-lahir.index');
         Route::post('/store', [App\Http\Controllers\AktaLahirController::class, 'store'])->name('akta-lahir.store');
         Route::get('/{aktaLahirId}', [App\Http\Controllers\AktaLahirController::class, 'show'])->name('akta-lahir.show');
+        Route::post('/{aktaLahirId}/accept', [App\Http\Controllers\AktaLahirController::class, 'acceptAktaLahir'])->name('akta-lahir.accept');
+        Route::post('/{aktaLahirId}/reject', [App\Http\Controllers\AktaLahirController::class, 'rejectAktaLahir'])->name('akta-lahir.reject');
+        Route::get('/{aktaLahirId}/pdf', [App\Http\Controllers\AktaLahirController::class, 'generatePDF'])->name('akta-lahir.generatePDF');
+        Route::get('/{aktaLahirId}/pdf/view', [App\Http\Controllers\AktaLahirController::class, 'viewPDF'])->name('akta-lahir.viewPDF');
     });
 
     Route::prefix('/akta-perkawinan')->group(function () {
