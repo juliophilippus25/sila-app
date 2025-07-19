@@ -14,7 +14,7 @@ class DataIstriRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'di_nik' => 'required|digits:16',
+            'di_nik' => 'required|digits:16|unique:perkawinan_istris,nik,',
             'di_nomor_kk' => 'required|digits:16',
             'di_nomor_paspor' => 'nullable|string|min:3',
             'di_nama_lengkap' => 'required|string|min:3',
@@ -45,6 +45,7 @@ class DataIstriRequest extends FormRequest
     {
         return [
             // required
+            'di_nik.unique' => 'NIK sudah terdaftar.',
             'di_nik.required' => 'NIK wajib diisi.',
             'di_nik.digits' => 'NIK harus terdiri dari 16 digit.',
             'di_nomor_kk.required' => 'Nomor KK wajib diisi.',

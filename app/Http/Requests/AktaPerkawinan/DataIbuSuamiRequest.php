@@ -15,7 +15,7 @@ class DataIbuSuamiRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'dids_nik' => 'required|digits:16',
+            'dids_nik' => 'required|digits:16|unique:perkawinan_ibu_suamis,nik,',
             'dids_nama_lengkap' => 'required|string|min:3',
             'dids_tanggal_lahir' => 'required|date|before:today',
             'dids_tempat_lahir' => 'required|string|min:3',
@@ -38,6 +38,7 @@ class DataIbuSuamiRequest extends FormRequest
     {
         return [
             // required
+            'dids_nik.unique' => 'NIK sudah terdaftar.',
             'dids_nik.required' => 'NIK wajib diisi.',
             'dids_nik.digits' => 'NIK harus terdiri dari 16 digit.',
             'dids_nama_lengkap.required' => 'Nama lengkap wajib diisi.',
@@ -56,7 +57,6 @@ class DataIbuSuamiRequest extends FormRequest
             'dids_pekerjaan.required' => 'Pekerjaan wajib diisi.',
 
             // digits
-            'dids_nomor_kk.digits' => 'Nomor KK harus terdiri dari 16 digit.',
             'dids_kode_pos.digits' => 'Kode pos harus terdiri dari 5 digit.',
             'dids_telepon.digits' => 'Nomor telepon harus terdiri dari 9 digit.',
 
@@ -65,8 +65,6 @@ class DataIbuSuamiRequest extends FormRequest
             'dids_rw.numeric' => 'RW harus berupa angka.',
 
             // string
-            'dids_nomor_kk.string' => 'Nomor KK harus berupa string.',
-            'dids_nomor_paspor.string' => 'Nomor paspor harus berupa string.',
             'dids_nama_lengkap.string' => 'Nama lengkap harus berupa string.',
             'dids_tempat_lahir.string' => 'Tempat lahir harus berupa string.',
             'dids_alamat.string' => 'Alamat harus berupa string.',
@@ -76,11 +74,10 @@ class DataIbuSuamiRequest extends FormRequest
             'dids_telepon.string' => 'Nomor telepon harus berupa string.',
 
             // min
-            'dids_nomor_paspor.min' => 'Nomor paspor minimal dari 3 karakter.',
             'dids_nama_lengkap.min' => 'Nama lengkap minimal dari 3 karakter.',
             'dids_tempat_lahir.min' => 'Tempat lahir minimal dari 3 karakter.',
             'dids_alamat.min' => 'Alamat minimal dari 3 karakter.',
-            'dids_teleponn.min' => 'Nomor telepon minimal dari 9 karakter.',
+            'dids_telepon.min' => 'Nomor telepon minimal dari 9 karakter.',
             'dids_kelurahan.min' => 'Kelurahan minimal dari 3 karakter.',
             'dids_kecamatan.min' => 'Kecamatan minimal dari 3 karakter.',
             'dids_kabupaten.min' => 'Kabupaten/Kota minimal dari 3 karakter.',

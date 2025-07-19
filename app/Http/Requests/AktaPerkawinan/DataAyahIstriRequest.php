@@ -14,7 +14,7 @@ class DataAyahIstriRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'dadi_nik' => 'required|digits:16',
+            'dadi_nik' => 'required|digits:16|unique:perkawinan_ayah_istris,nik,',
             'dadi_nama_lengkap' => 'required|string|min:3',
             'dadi_tanggal_lahir' => 'required|date|before:today',
             'dadi_tempat_lahir' => 'required|string|min:3',
@@ -38,6 +38,7 @@ class DataAyahIstriRequest extends FormRequest
         return [
             // required
             'dadi_nik.required' => 'NIK wajib diisi.',
+            'dadi_nik.unique' => 'NIK sudah terdaftar.',
             'dadi_nik.digits' => 'NIK harus terdiri dari 16 digit.',
             'dadi_nama_lengkap.required' => 'Nama lengkap wajib diisi.',
             'dadi_tanggal_lahir.required' => 'Tanggal lahir wajib diisi.',
@@ -55,7 +56,6 @@ class DataAyahIstriRequest extends FormRequest
             'dadi_pekerjaan.required' => 'Pekerjaan wajib diisi.',
 
             // digits
-            'dadi_nomor_kk.digits' => 'Nomor KK harus terdiri dari 16 digit.',
             'dadi_kode_pos.digits' => 'Kode pos harus terdiri dari 5 digit.',
             'dadi_telepon.digits' => 'Nomor telepon harus terdiri dari 9 digit.',
 
@@ -64,8 +64,6 @@ class DataAyahIstriRequest extends FormRequest
             'dadi_rw.numeric' => 'RW harus berupa angka.',
 
             // string
-            'dadi_nomor_kk.string' => 'Nomor KK harus berupa string.',
-            'dadi_nomor_paspor.string' => 'Nomor paspor harus berupa string.',
             'dadi_nama_lengkap.string' => 'Nama lengkap harus berupa string.',
             'dadi_tempat_lahir.string' => 'Tempat lahir harus berupa string.',
             'dadi_alamat.string' => 'Alamat harus berupa string.',
@@ -75,7 +73,6 @@ class DataAyahIstriRequest extends FormRequest
             'dadi_telepon.string' => 'Nomor telepon harus berupa string.',
 
             // min
-            'dadi_nomor_paspor.min' => 'Nomor paspor minimal dari 3 karakter.',
             'dadi_nama_lengkap.min' => 'Nama lengkap minimal dari 3 karakter.',
             'dadi_tempat_lahir.min' => 'Tempat lahir minimal dari 3 karakter.',
             'dadi_alamat.min' => 'Alamat minimal dari 3 karakter.',

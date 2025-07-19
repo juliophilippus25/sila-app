@@ -20,12 +20,10 @@
 
             <div>
                 <x-input-label for="dba_jk" :value="__('Jenis Kelamin') . ' <span class=\'text-red-600\'>*</span>'" />
-
                 <div class="flex gap-2">
                     <x-radio-button name="dba_jk" value="Laki-laki" label="Laki-laki" :checked="old('jk') === 'Laki-laki'" />
                     <x-radio-button name="dba_jk" value="Perempuan" label="Perempuan" :checked="old('jk') === 'Perempuan'" />
                 </div>
-
                 <x-input-error class="mt-2" :messages="$errors->get('dba_jk')" />
             </div>
         </div>

@@ -14,7 +14,7 @@ class DataSuamiRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'ds_nik' => 'required|digits:16',
+            'ds_nik' => 'required|digits:16|unique:perkawinan_suamis,nik,',
             'ds_nomor_kk' => 'required|digits:16',
             'ds_nomor_paspor' => 'nullable|string|min:3',
             'ds_nama_lengkap' => 'required|string|min:3',
@@ -46,6 +46,7 @@ class DataSuamiRequest extends FormRequest
     {
         return [
             // required
+            'ds_nik.unique' => 'NIK sudah terdaftar.',
             'ds_nik.required' => 'NIK wajib diisi.',
             'ds_nik.digits' => 'NIK harus terdiri dari 16 digit.',
             'ds_nomor_kk.required' => 'Nomor KK wajib diisi.',

@@ -22,7 +22,6 @@ return new class extends Migration
             $table->time('pukul')->nullable();
             $table->enum('jenis_kelahiran', ['Tunggal', 'Kembar 2', 'Kembar 3', 'Kembar 4','Lainnya'])->nullable();
             $table->integer('kelahiran_ke')->nullable();
-            $table->enum('jenis_kelahiran', ['Tunggal', 'Kembar 2', 'Kembar 3', 'Kembar 4','Lainnya'])->nullable();
             $table->enum('penolong_kelahiran', ['Dokter', 'Bidan/Perawat', 'Dukun', 'Lainnya'])->nullable();
             $table->integer('berat_bayi')->nullable();
             $table->integer('panjang_bayi')->nullable();
