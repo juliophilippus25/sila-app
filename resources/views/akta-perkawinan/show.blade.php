@@ -87,34 +87,34 @@
 
                     <div>
                         <div x-show="tab === 'akta'">
-                            @include('akta-perkawinan.tabs-show.akta-perkawinan')
+                            @include('akta-perkawinan.partials.tabs-show.akta-perkawinan')
                         </div>
                         <div x-show="tab === 'suami'">
-                            @include('akta-perkawinan.tabs-show.data-suami')
+                            @include('akta-perkawinan.partials.tabs-show.data-suami')
                         </div>
                         <div x-show="tab === 'ayah_suami'">
-                            @include('akta-perkawinan.tabs-show.data-ayah-suami')
+                            @include('akta-perkawinan.partials.tabs-show.data-ayah-suami')
                         </div>
                         <div x-show="tab === 'ibu_suami'">
-                            @include('akta-perkawinan.tabs-show.data-ibu-suami')
+                            @include('akta-perkawinan.partials.tabs-show.data-ibu-suami')
                         </div>
                         <div x-show="tab === 'istri'">
-                            @include('akta-perkawinan.tabs-show.data-istri')
+                            @include('akta-perkawinan.partials.tabs-show.data-istri')
                         </div>
                         <div x-show="tab === 'ayah_istri'">
-                            @include('akta-perkawinan.tabs-show.data-ayah-istri')
+                            @include('akta-perkawinan.partials.tabs-show.data-ayah-istri')
                         </div>
                         <div x-show="tab === 'ibu_istri'">
-                            @include('akta-perkawinan.tabs-show.data-ibu-istri')
+                            @include('akta-perkawinan.partials.tabs-show.data-ibu-istri')
                         </div>
                         <div x-show="tab === 'saksi'">
-                            @include('akta-perkawinan.tabs-show.data-saksi')
+                            @include('akta-perkawinan.partials.tabs-show.data-saksi')
                         </div>
                         <div x-show="tab === 'perkawinan'">
-                            @include('akta-perkawinan.tabs-show.data-perkawinan')
+                            @include('akta-perkawinan.partials.tabs-show.data-perkawinan')
                         </div>
                         <div x-show="tab === 'administrasi'">
-                            @include('akta-perkawinan.tabs-show.data-administrasi')
+                            @include('akta-perkawinan.partials.tabs-show.data-administrasi')
                         </div>
                     </div>
                 </div>
