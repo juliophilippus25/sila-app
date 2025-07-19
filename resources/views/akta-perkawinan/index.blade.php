@@ -179,7 +179,7 @@
                                     type="button">{{ __('Previous') }}</x-secondary-button>
                                 <x-primary-button id="next-btn" type="button">{{ __('Next') }}</x-primary-button>
                                 <x-primary-button id="submit-btn" type="submit">{{ __('Submit') }}</x-primary-button>
-                            </div> --}}
+                            </div>
                         </form>
                     </div>
                 </div>

@@ -59,4 +59,14 @@ class AktaLahir extends Model
     {
         return $this->hasOne(LahirPelapor::class, 'akta_lahir_id');
     }
+
+    public function lahirSaksi()
+    {
+        return $this->hasOne(LahirSaksi::class, 'akta_lahir_id');
+    }
+
+    public function lahirAdministrasi()
+    {
+        return $this->hasOne(LahirAdministrasi::class, 'akta_lahir_id');
+    }
 }

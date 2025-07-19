@@ -22,6 +22,22 @@ use Illuminate\Support\Facades\Validator;
 class AktaLahirController extends Controller
 {
     public function index() {
+        $dataType = 'Akta Lahir';
+        $userLogin = Auth::user()->id;
+        $hasAktaLahir = AktaLahir::with([
+            'user',
+            'petugas',
+            'lahirBayiAnak',
+            'lahirAyah',
+            'lahirIbu',
+            'lahirPelapor',
+            'lahirSaksi',
+            'lahirAdministrasi'
+        ])
+        ->where('user_id', $userLogin)
+        ->first();
+
+        $aktaLahirs = AktaLahir::with(['petugas', 'lahirBayiAnak', 'lahirAyah', 'lahirIbu', 'lahirPelapor', 'lahirSaksi', 'lahirAdministrasi'])->get();
         $jenisKelamin = $this->getJenisKelamin();
         $tempatLahir = $this->getTempatLahir();
         $jenisKelahiran = $this->getJenisKelahiran();
@@ -29,7 +45,23 @@ class AktaLahirController extends Controller
         $pekerjaan = $this->getPekerjaan();
         $kewarganegaraan = $this->getKewarganegaraan();
 
-        return view('akta-lahir.index', compact('jenisKelamin', 'tempatLahir', 'jenisKelahiran', 'penolongKelahiran', 'pekerjaan', 'kewarganegaraan'));
+        $data = [
+            'jenisKelamin' => $jenisKelamin,
+            'tempatLahir' => $tempatLahir,
+            'jenisKelahiran' => $jenisKelahiran,
+            'penolongKelahiran' => $penolongKelahiran,
+            'pekerjaan' => $pekerjaan,
+            'kewarganegaraan' => $kewarganegaraan,
+            'hasAktaLahir' => $hasAktaLahir,
+            'dataType' => $dataType,
+            'aktaLahirs' => $aktaLahirs,
+        ];
+
+        if (auth()->user()->role == 'user' && $hasAktaLahir) {
+            $data['persyaratanData'] = json_decode($hasAktaLahir->lahirAdministrasi->persyaratan, true);
+        }
+
+        return view('akta-lahir.index', $data);
     }
 
     public function store(Request $request) {
@@ -54,12 +86,26 @@ class AktaLahirController extends Controller
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails()) {
-            dd($validator->errors());
             toast('Periksa kembali data anda.', 'error')->hideCloseButton()->autoClose(3000);
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
         $userLogin = Auth::user()->id;
+
+        $pengajuanTertolak = AktaLahir::where('user_id', $userLogin)
+            ->where('status', 'rejected')
+            ->first();
+
+        if ($pengajuanTertolak) {
+            $pengajuanTertolak->lahirBayiAnak()->delete();
+            $pengajuanTertolak->lahirAyah()->delete();
+            $pengajuanTertolak->lahirIbu()->delete();
+            $pengajuanTertolak->lahirPelapor()->delete();
+            $pengajuanTertolak->lahirSaksi()->delete();
+            $pengajuanTertolak->lahirAdministrasi?->deleteWithFiles();
+
+            $pengajuanTertolak->delete();
+        }
 
         $aktaLahir = new AktaLahir();
         $aktaLahir->user_id = $userLogin;

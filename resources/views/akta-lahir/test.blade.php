@@ -1,0 +1,106 @@
+@section('title', 'Akta Lahir')
+
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Akta Lahir') }}
+        </h2>
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                <form method="post" action="{{ route('akta-lahir.store') }}" class="space-y-6" enctype="multipart/form-data" id="submit-form">
+                    @csrf
+
+                    <div id="stepper-form">
+                        <div id="step-1" class="step-content">
+                            @include('akta-lahir.partials.forms.data-bayi-anak-form')
+                        </div>
+
+                        <div id="step-2" class="step-content hidden">
+                            @include('akta-lahir.partials.forms.data-ibu-form')
+                        </div>
+
+                        <div id="step-3" class="step-content hidden">
+                            @include('akta-lahir.partials.forms.data-ayah-form')
+                        </div>
+
+                        <div id="step-4" class="step-content">
+                            @include('akta-lahir.partials.forms.data-pelapor-form')
+                        </div>
+
+                        <div id="step-5" class="step-content hidden">
+                            @include('akta-lahir.partials.forms.data-saksi-form')
+                        </div>
+
+                        <div id="step-6" class="step-content hidden">
+                            @include('akta-lahir.partials.forms.data-administrasi-form')
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between">
+                        <x-secondary-button id="prev-btn" type="button">{{ __('Previous') }}</x-secondary-button>
+                        <x-primary-button id="next-btn" type="button">{{ __('Next') }}</x-primary-button>
+                        <x-primary-button id="submit-btn" type="submit">{{ __('Submit') }}</x-primary-button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const stepperForm = document.getElementById('stepper-form');
+            const steps = document.querySelectorAll('.step-content');
+            let currentStep = 0;
+            const nextButton = document.getElementById('next-btn');
+            const prevButton = document.getElementById('prev-btn');
+            const submitButton = document.getElementById('submit-btn');
+
+            // Function to show a specific step
+            function showStep(stepIndex) {
+                steps.forEach((step, index) => {
+                    step.classList.add('hidden');
+                    if (index === stepIndex) {
+                        step.classList.remove('hidden');
+                    }
+                });
+
+                // Update button visibility
+                if (stepIndex === steps.length - 1) {
+                    nextButton.classList.add('hidden');
+                    submitButton.classList.remove('hidden');
+                } else {
+                    nextButton.classList.remove('hidden');
+                    submitButton.classList.add('hidden');
+                }
+
+                if (stepIndex === 0) {
+                    prevButton.classList.add('hidden');
+                } else {
+                    prevButton.classList.remove('hidden');
+                }
+            }
+
+            // Next button handler
+            nextButton.addEventListener('click', function() {
+                if (currentStep < steps.length - 1) {
+                    currentStep++;
+                    showStep(currentStep);
+                }
+            });
+
+            // Previous button handler
+            prevButton.addEventListener('click', function() {
+                if (currentStep > 0) {
+                    currentStep--;
+                    showStep(currentStep);
+                }
+            });
+
+            // Initialize the first step
+            showStep(currentStep);
+        });
+    </script>
+</x-app-layout>
