@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('lahir_pelapors', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->string('akta_lahir_id');
+            $table->string('nik')->nullable();
             $table->string('nama_lengkap')->nullable();
             $table->date('tanggal_lahir')->nullable();
             $table->integer('umur')->nullable();

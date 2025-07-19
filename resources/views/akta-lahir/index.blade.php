@@ -33,6 +33,10 @@
                         <div id="step-5" class="step-content hidden">
                             @include('akta-lahir.partials.forms.data-saksi-form')
                         </div>
+
+                        <div id="step-6" class="step-content hidden">
+                            @include('akta-lahir.partials.forms.data-administrasi-form')
+                        </div>
                     </div>
 
                     <div class="flex justify-between">
