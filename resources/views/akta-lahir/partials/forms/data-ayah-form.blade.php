@@ -63,14 +63,14 @@
             <div>
                 <x-input-label for="da_kabupaten" :value="__('Kabupaten/Kota') . ' <span class=\'text-red-600\'>*</span>'" />
                 <x-text-input id="da_kabupaten" name="da_kabupaten" type="text" class="mt-1 block w-full"
-                    :value="old('da_kabupaten')" />
+                    :value="'Bengkayang'" readonly />
                 <x-input-error class="mt-2" :messages="$errors->get('da_kabupaten')" />
             </div>
 
             <div>
                 <x-input-label for="da_provinsi" :value="__('Provinsi') . ' <span class=\'text-red-600\'>*</span>'" />
                 <x-text-input id="da_provinsi" name="da_provinsi" type="text" class="mt-1 block w-full"
-                    :value="old('da_provinsi')" />
+                    :value="'Kalimantan Barat'" readonly />
                 <x-input-error class="mt-2" :messages="$errors->get('da_provinsi')" />
             </div>
         </div>
@@ -93,13 +93,6 @@
                 <x-text-input id="da_kebangsaan" name="da_kebangsaan" type="text" class="mt-1 block w-full"
                     :value="old('da_kebangsaan')" />
                 <x-input-error class="mt-2" :messages="$errors->get('da_kebangsaan')" />
-            </div>
-
-            <div>
-                <x-input-label for="da_pencatatan_perkawinan" :value="__('Tanggal Pencatatan Perkawinan') . ' <span class=\'text-red-600\'>*</span>'" />
-                <x-text-input id="da_pencatatan_perkawinan" name="da_pencatatan_perkawinan" type="date"
-                    class="mt-1 block w-full" :value="old('da_pencatatan_perkawinan')" />
-                <x-input-error class="mt-2" :messages="$errors->get('da_pencatatan_perkawinan')" />
             </div>
         </div>
 

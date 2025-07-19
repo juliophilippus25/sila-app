@@ -34,7 +34,8 @@ class LahirIbu extends Model
         'provinsi',
         'alamat',
         'kewarganegaraan',
-        'kebangsaan'
+        'kebangsaan',
+        'tanggal_pencatatan_perkawinan'
     ];
 
     public function aktaLahir()

@@ -19,12 +19,12 @@
             </div>
 
             <div>
-                <x-input-label for="dba_jk" :value="__('Jenis Kelamin') . ' <span class=\'text-red-600\'>*</span>'" />
+                <x-input-label for="dba_jenis_kelamin" :value="__('Jenis Kelamin') . ' <span class=\'text-red-600\'>*</span>'" />
                 <div class="flex gap-2">
-                    <x-radio-button name="dba_jk" value="Laki-laki" label="Laki-laki" :checked="old('jk') === 'Laki-laki'" />
-                    <x-radio-button name="dba_jk" value="Perempuan" label="Perempuan" :checked="old('jk') === 'Perempuan'" />
+                    <x-radio-button name="dba_jenis_kelamin" value="Laki-laki" label="Laki-laki" :checked="old('dba_jenis_kelamin') === 'Laki-laki'" />
+                    <x-radio-button name="dba_jenis_kelamin" value="Perempuan" label="Perempuan" :checked="old('dba_jenis_kelamin') === 'Perempuan'" />
                 </div>
-                <x-input-error class="mt-2" :messages="$errors->get('dba_jk')" />
+                <x-input-error class="mt-2" :messages="$errors->get('dba_jenis_kelamin')" />
             </div>
         </div>
 
@@ -59,9 +59,15 @@
             </div>
         </div>
 
+        <div>
+            <x-select name="dba_penolong_kelahiran" :label="__('Penolong Kelahiran') . ' <span class=\'text-red-600\'>*</span>'" :options="$penolongKelahiran"
+                placeholder="Pilih Penolong Kelahiran" :value="old('dba_penolong_kelahiran')" />
+            <x-input-error class="mt-2" :messages="$errors->get('dba_penolong_kelahiran')" />
+        </div>
+
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
             <div>
-                <x-select name="dba_jenis_kelahiran" :label="__('Jenis Kelahiran') . ' <span class=\'text-red-600\'>*</span>'" :options="$tempatLahir"
+                <x-select name="dba_jenis_kelahiran" :label="__('Jenis Kelahiran') . ' <span class=\'text-red-600\'>*</span>'" :options="$jenisKelahiran"
                     placeholder="Pilih Jenis Kelahiran" :value="old('dba_jenis_kelahiran')" />
                 <x-input-error class="mt-2" :messages="$errors->get('dba_jenis_kelahiran')" />
             </div>

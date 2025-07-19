@@ -26,7 +26,6 @@ return new class extends Migration
             $table->string('alamat')->nullable();
             $table->enum('kewarganegaraan', ['WNI', 'WNA'])->nullable();
             $table->string('kebangsaan')->nullable();
-            $table->date('tanggal_pencatatan_perkawinan')->nullable();
             $table->timestamps();
 
             $table->foreign('akta_lahir_id')->references('id')->on('akta_lahirs')->onDelete('cascade');

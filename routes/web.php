@@ -24,6 +24,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::prefix('/akta-lahir')->group(function () {
         Route::get('', [App\Http\Controllers\AktaLahirController::class, 'index'])->name('akta-lahir.index');
+        Route::post('/store', [App\Http\Controllers\AktaLahirController::class, 'store'])->name('akta-lahir.store');
     });
 
     Route::prefix('/akta-perkawinan')->group(function () {
