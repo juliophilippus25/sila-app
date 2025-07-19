@@ -15,12 +15,9 @@
                 {{ __('Tutup') }}
             </x-secondary-button>
 
-            <form action="{{ route('akta-perkawinan.reject', $aktaPerkawinan->id) }}" method="post" id="submit-form">
-                @csrf
-                <x-danger-button class="ms-3">
-                    {{ __('Tolak') }}
-                </x-danger-button>
-            </form>
+            <x-danger-button class="ms-3" x-on:click.prevent="$dispatch('open-modal', 'alasan-penolakan')">
+                {{ __('Tolak') }}
+            </x-danger-button>
 
             <form action="{{ route('akta-perkawinan.accept', $aktaPerkawinan->id) }}" method="post" id="submit-form">
                 @csrf
