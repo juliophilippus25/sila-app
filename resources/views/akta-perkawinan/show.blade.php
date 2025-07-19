@@ -11,7 +11,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             @if (auth()->user()->role == 'petugas' && $aktaPerkawinan->status == 'pending')
                 <div class="flex justify-end mb-4">
-                    @include('akta-perkawinan.partials.verification-modal')
+                    @include('akta-perkawinan.partials.forms.verification-modal')
                 </div>
 
                 @include('akta-perkawinan.partials.forms.rejected-modal')
