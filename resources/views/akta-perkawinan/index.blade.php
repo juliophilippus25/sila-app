@@ -15,7 +15,7 @@
                         {{-- Tabs --}}
                         <div x-data="{ tab: 'akta' }">
                             <div class="border-b border-gray-200 mb-4">
-                                <nav class="-mb-px flex space-x-8 overflow-x-scroll no-scrollbar">
+                                <nav class="-mb-px flex space-x-8 overflow-x-scroll pb-2">
                                     <button @click="tab = 'akta'"
                                         :class="tab === 'akta' ? 'border-indigo-500 text-indigo-600' :
                                             'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'"
@@ -179,7 +179,7 @@
                                     type="button">{{ __('Previous') }}</x-secondary-button>
                                 <x-primary-button id="next-btn" type="button">{{ __('Next') }}</x-primary-button>
                                 <x-primary-button id="submit-btn" type="submit">{{ __('Submit') }}</x-primary-button>
-                            </div>
+                            </div> --}}
                         </form>
                     </div>
                 </div>
